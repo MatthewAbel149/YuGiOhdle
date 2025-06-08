@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the Character</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f5f5f5;
+        }
+
+        .game-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .dropdown {
+            border: 1px solid #ccc;
+            max-height: 250px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .entry {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+            .entry:hover {
+                background: #f0f0f0;
+            }
+
+            .entry img {
+                width: 50px;
+                height: 50px;
+                border-radius: 6px;
+                object-fit: cover;
+            }
+
+        .entry-details {
+            font-size: 14px;
+            color: #444;
+        }
+
+        .grid-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .guess-row {
+            display: grid;
+            grid-template-columns: 60px 1fr 1fr 1.5fr 1fr 0.8fr;
+            gap: 5px;
+            width: 100%;
+        }
+
+        .box.header {
+            background-color: #ddd;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .box, .portrait {
+            padding: 10px;
+            border-radius: 4px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            overflow: hidden;
+        }
+
+        .portrait {
+            padding: 0;
+        }
+
+            .portrait img {
+                width: 50px;
+                height: 50px;
+                border-radius: 4px;
+                object-fit: cover;
+            }
+
+        .green {
+            background-color: #4caf50;
+        }
+
+        .yellow {
+            background-color: #fbc02d;
+            color: #000;
+        }
+
+        .red {
+            background-color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+
+        <h1>Guess the Character</h1>
+
+        <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
+        <div id="suggestions" class="dropdown" style="display:none;"></div>
+        <div class="grid-container">
+            <div class="guess-row labels">
+                <div class="box" style="background:#ddd; color:#000;">Portrait</div>
+                <div class="box" style="background:#ddd; color:#000;">Name</div>
+                <div class="box" style="background:#ddd; color:#000;">Race</div>
+                <div class="box" style="background:#ddd; color:#000;">Weapon</div>
+                <div class="box" style="background:#ddd; color:#000;">Color</div>
+                <div class="box" style="background:#ddd; color:#000;">Magic</div>
+            </div>
+            <div id="grid" class="grid-subcontainer"></div>
+        </div>
+        </div>
+        <script>
+            const characters = [
+                {
+                    name: 'Aria',
+                    race: 'Elf',
+                    weapon: 'Bow',
+                    color: 'Green',
+                    magic: 8,
+                    image: 'https://robohash.org/aria?set=set2'
+                },
+                {
+                    name: 'Borg',
+                    race: 'Orc',
+                    weapon: 'Axe',
+                    color: 'Red',
+                    magic: 2,
+                    image: 'https://robohash.org/borg?set=set2'
+                },
+                {
+                    name: 'Celeste',
+                    race: 'Human',
+                    weapon: 'Sword',
+                    color: 'Blue',
+                    magic: 5,
+                    image: 'https://robohash.org/celeste?set=set2'
+                },
+                {
+                    name: 'Draven',
+                    race: 'Human',
+                    weapon: 'Sword,Bow',
+                    color: 'Silver',
+                    magic: 3,
+                    image: 'https://robohash.org/draven?set=set2'
+                }
+            ];
+
+            const mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
+            const searchInput = document.getElementById('searchInput');
+            const suggestionsBox = document.getElementById('suggestions');
+            const gridContainer = document.getElementById('grid');
+
+            function getColor(value, answerValue) {
+                if (value === answerValue) return 'green';
+
+                const valSet = new Set(value.toLowerCase().split(',').map(s => s.trim()));
+                const ansSet = new Set(answerValue.toLowerCase().split(',').map(s => s.trim()));
+                const match = [...valSet].filter(v => ansSet.has(v));
+
+                return match.length > 0 ? 'yellow' : 'red';
+            }
+
+            function getMagicColor(value, answerValue) {
+                return value === answerValue ? 'green' : 'red';
+            }
+
+            function addGuessRow(char, colors) {
+                const row = document.createElement('div');
+                row.className = 'guess-row';
+
+                const imgBox = document.createElement('div');
+                imgBox.className = 'portrait';
+                imgBox.innerHTML = `<img src="${char.image}" alt="${char.name}" />`;
+                row.appendChild(imgBox);
+
+                ['name', 'race', 'weapon', 'color', 'magic'].forEach(attr => {
+                    const box = document.createElement('div');
+                    box.className = `box ${colors[attr]}`;
+                    box.textContent = char[attr];
+                    row.appendChild(box);
+                });
+
+                gridContainer.appendChild(row);
+            }
+
+            function handleGuess(char) {
+                const colors = {
+                    name: char.name === mysteryCharacter.name ? 'green' : 'red',
+                    race: getColor(char.race, mysteryCharacter.race),
+                    weapon: getColor(char.weapon, mysteryCharacter.weapon),
+                    color: getColor(char.color, mysteryCharacter.color),
+                    magic: getMagicColor(char.magic, mysteryCharacter.magic),
+                };
+                addGuessRow(char, colors);
+            }
+
+            function showSuggestions(value) {
+                const matches = characters.filter(c =>
+                    c.name.toLowerCase().includes(value.toLowerCase())
+                );
+
+                suggestionsBox.innerHTML = '';
+                if (matches.length === 0 || value.trim() === '') {
+                    suggestionsBox.style.display = 'none';
+                    return;
+                }
+
+                matches.forEach(char => {
+                    const div = document.createElement('div');
+                    div.className = 'entry';
+                    div.innerHTML = `
+                    <img src="${char.image}" alt="${char.name}" />
+                    <div>
+                      <strong>${char.name}</strong><br/>
+                      <div class="entry-details">
+                        Race: ${char.race} | Weapon: ${char.weapon} | Color: ${char.color} | Magic: ${char.magic}
+                      </div>
+                    </div>`;
+                    div.addEventListener('click', () => {
+                        searchInput.value = '';
+                        suggestionsBox.style.display = 'none';
+                        handleGuess(char);
+                    });
+                    suggestionsBox.appendChild(div);
+                });
+
+                suggestionsBox.style.display = 'block';
+            }
+
+            searchInput.addEventListener('input', e => {
+                showSuggestions(e.target.value);
+            });
+
+            document.addEventListener('click', e => {
+                if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+                    suggestionsBox.style.display = 'none';
+                }
+            });
+        </script>
+
+</body>
+</html>
