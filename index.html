@@ -17,6 +17,7 @@
             justify-content: center;
             align-items: center;
             background: #f5f5f5;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSynlnk_kuBO_U7_UAKNXTAUg3KN95UiQKF7A&s');
         }
 
         .game-container {
@@ -58,16 +59,16 @@
             cursor: pointer;
         }
 
-            .entry:hover {
-                background: #f0f0f0;
-            }
+        .entry:hover {
+            background: #f0f0f0;
+        }
 
-            .entry img {
-                width: 50px;
-                height: 50px;
-                border-radius: 6px;
-                object-fit: cover;
-            }
+        .entry img {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
 
         .entry-details {
             font-size: 14px;
@@ -81,6 +82,7 @@
             width: 100%;
         }
 
+        /*Settings for player's previous guess display*/
         .guess-row {
             display: grid;
             grid-template-columns: 60px 1fr 1fr 1.5fr 1fr 0.8fr;
@@ -107,12 +109,12 @@
             padding: 0;
         }
 
-            .portrait img {
-                width: 50px;
-                height: 50px;
-                border-radius: 4px;
-                object-fit: cover;
-            }
+        .portrait img {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
 
         .green {
             background-color: #4caf50;
@@ -126,60 +128,70 @@
         .red {
             background-color: #f44336;
         }
+
     </style>
 </head>
 <body>
-    <div class="game-container">
+        <div class="game-container">
 
-        <h1>Guess the Character</h1>
+            <h1>Guess the Character</h1>
 
-        <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
-        <div id="suggestions" class="dropdown" style="display:none;"></div>
-        <div class="grid-container">
-            <div class="guess-row labels">
-                <div class="box" style="background:#ddd; color:#000;">Portrait</div>
-                <div class="box" style="background:#ddd; color:#000;">Name</div>
-                <div class="box" style="background:#ddd; color:#000;">Race</div>
-                <div class="box" style="background:#ddd; color:#000;">Weapon</div>
-                <div class="box" style="background:#ddd; color:#000;">Color</div>
-                <div class="box" style="background:#ddd; color:#000;">Magic</div>
+            <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
+            <div id="suggestions" class="dropdown" style="display:none;">
+                <div class="guess-row preview-entry">
+                    <div class="portrait"><img src="portrait-url.jpg" alt="Name" /></div>
+                    <div class="box">Name</div>
+                    <div class="box">Series</div>
+                    <div class="box">Age(s)</div>
+                    <div class="box">Color</div>
+                    <div class="box">Victories</div>
+                </div>
             </div>
-            <div id="grid" class="grid-subcontainer"></div>
-        </div>
+            <div class="grid-container">
+                <div class="guess-row labels">
+                    <div class="box" style="background:#ddd; color:#000;">Portrait</div>
+                    <div class="box" style="background:#ddd; color:#000;">Name</div>
+                    <div class="box" style="background:#ddd; color:#000;">Series</div>
+                    <div class="box" style="background:#ddd; color:#000;">Age</div>
+                    <div class="box" style="background:#ddd; color:#000;">Color</div>
+                    <div class="box" style="background:#ddd; color:#000;">Victories</div>
+                </div>
+                <div id="grid" class="grid-subcontainer"></div>
+            </div>
         </div>
         <script>
             const characters = [
                 {
-                    name: 'Aria',
-                    race: 'Elf',
-                    weapon: 'Bow',
+                    name: 'Yami Yugi',
+                    series: 'Duel Monsters',
+                    age: '1000+',
                     color: 'Green',
-                    magic: 8,
-                    image: 'https://robohash.org/aria?set=set2'
+                    victories: 34,
+                    image: 'https://uploads1.yugioh.com/character/3/detail/list/yamiyugi-m.png?1371661244'
                 },
                 {
-                    name: 'Borg',
-                    race: 'Orc',
-                    weapon: 'Axe',
+                    name: 'Yugi',
+                    series: 'Duel Monsters',
+                    age: '16',
                     color: 'Red',
-                    magic: 2,
-                    image: 'https://robohash.org/borg?set=set2'
+                    victories: 34,
+                    image: 'https://uploads1.yugioh.com/character/2/detail/list/yugi-m.png?1371660956'
                 },
                 {
-                    name: 'Celeste',
-                    race: 'Human',
-                    weapon: 'Sword',
+                    name: 'Jaden',
+                    series: 'GX',
+                    age: '15',
                     color: 'Blue',
-                    magic: 5,
-                    image: 'https://robohash.org/celeste?set=set2'
+                    victories: 78,
+                    image: 'https://uploads2.yugioh.com/character/24/detail/list/jaden-m.png?1371840762'
                 },
                 {
-                    name: 'Draven',
-                    race: 'Human',
-                    weapon: 'Sword,Bow',
+                    name: 'Yusei',
+                    series: '5Ds',
+                    age: '18',
                     color: 'Silver',
-                    magic: 3,
-                    image: 'https://robohash.org/draven?set=set2'
+                    victories: 52,
+                    image: 'https://uploads2.yugioh.com/character/31/detail/list/yusei-m.png?1371843969'
                 }
             ];
 
@@ -211,7 +223,7 @@
                 imgBox.innerHTML = `<img src="${char.image}" alt="${char.name}" />`;
                 row.appendChild(imgBox);
 
-                ['name', 'race', 'weapon', 'color', 'magic'].forEach(attr => {
+                ['name', 'series', 'age', 'color', 'victories'].forEach(attr => {
                     const box = document.createElement('div');
                     box.className = `box ${colors[attr]}`;
                     box.textContent = char[attr];
@@ -224,10 +236,10 @@
             function handleGuess(char) {
                 const colors = {
                     name: char.name === mysteryCharacter.name ? 'green' : 'red',
-                    race: getColor(char.race, mysteryCharacter.race),
-                    weapon: getColor(char.weapon, mysteryCharacter.weapon),
+                    series: getColor(char.series, mysteryCharacter.series),
+                    age: getColor(char.age, mysteryCharacter.age),
                     color: getColor(char.color, mysteryCharacter.color),
-                    magic: getMagicColor(char.magic, mysteryCharacter.magic),
+                    victories: getMagicColor(char.victories, mysteryCharacter.victories),
                 };
                 addGuessRow(char, colors);
             }
@@ -247,13 +259,13 @@
                     const div = document.createElement('div');
                     div.className = 'entry';
                     div.innerHTML = `
-                    <img src="${char.image}" alt="${char.name}" />
-                    <div>
-                      <strong>${char.name}</strong><br/>
-                      <div class="entry-details">
-                        Race: ${char.race} | Weapon: ${char.weapon} | Color: ${char.color} | Magic: ${char.magic}
-                      </div>
-                    </div>`;
+                            <img src="${char.image}" alt="${char.name}" />
+                            <div>
+                              <strong>${char.name}</strong><br/>
+                              <div class="entry-details">
+                                Series: ${char.series} | Age: ${char.age} | Color: ${char.color} | Victories: ${char.victories}
+                              </div>
+                            </div>`;
                     div.addEventListener('click', () => {
                         searchInput.value = '';
                         suggestionsBox.style.display = 'none';
