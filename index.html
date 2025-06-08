@@ -21,7 +21,7 @@
         }
 
         .game-container {
-            background: white;
+            background-color: rgba(0,0,0,0.7);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
@@ -33,6 +33,7 @@
         h1 {
             margin-top: 0;
             margin-bottom: 20px;
+            color: white;
         }
 
         input {
@@ -129,6 +130,49 @@
             background-color: #f44336;
         }
 
+        /*Settings for the suggestion boxes*/
+        #suggestions {
+            border: 1px solid #ccc;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            padding: 5px;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        #suggestions .guess-row {
+            display: grid;
+            grid-template-columns: 60px 1fr 1fr 1.5fr 1fr 0.8fr;
+            gap: 5px;
+            align-items: center;
+            background-color: #fafafa;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #suggestions .guess-row:hover {
+            background-color: #f0f0f0;
+        }
+
+        #suggestions .box {
+            padding: 10px;
+            text-align: center;
+            color: #333;
+            font-weight: normal;
+            background: #fff;
+            border-radius: 4px;
+        }
+
+        #suggestions .portrait img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
     </style>
 </head>
 <body>
@@ -137,9 +181,11 @@
             <h1>Guess the Character</h1>
 
             <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
-            <div id="suggestions" class="dropdown" style="display:none;">
+            <div id="suggestions" class="dropdown">
                 <div class="guess-row preview-entry">
-                    <div class="portrait"><img src="portrait-url.jpg" alt="Name" /></div>
+                    <div class="portrait">
+                        <img src="portrait-url.jpg" alt="Name" />
+                    </div>
                     <div class="box">Name</div>
                     <div class="box">Series</div>
                     <div class="box">Age(s)</div>
@@ -199,6 +245,7 @@
             const searchInput = document.getElementById('searchInput');
             const suggestionsBox = document.getElementById('suggestions');
             const gridContainer = document.getElementById('grid');
+            const guessedCharacters = new Set();
 
             function getColor(value, answerValue) {
                 if (value === answerValue) return 'green';
@@ -226,7 +273,24 @@
                 ['name', 'series', 'age', 'color', 'victories'].forEach(attr => {
                     const box = document.createElement('div');
                     box.className = `box ${colors[attr]}`;
-                    box.textContent = char[attr];
+                    let value = char[attr];
+                    let arrow = '';
+
+                    if (attr === 'victories') {
+                        if (char.victories < mysteryCharacter.victories) arrow = ' ▲';
+                        else if (char.victories > mysteryCharacter.victories) arrow = ' ▼';
+                    }
+
+                    if (attr === 'age') {
+                        const guessAge = parseInt(char.age);
+                        const correctAge = parseInt(mysteryCharacter.age);
+                        if (!isNaN(guessAge) && !isNaN(correctAge)) {
+                            if (guessAge < correctAge) arrow = ' ▲';
+                            else if (guessAge > correctAge) arrow = ' ▼';
+                        }
+                    }
+
+                    box.textContent = value + arrow;
                     row.appendChild(box);
                 });
 
@@ -234,6 +298,7 @@
             }
 
             function handleGuess(char) {
+                guessedCharacters.add(char.name);
                 const colors = {
                     name: char.name === mysteryCharacter.name ? 'green' : 'red',
                     series: getColor(char.series, mysteryCharacter.series),
@@ -246,7 +311,8 @@
 
             function showSuggestions(value) {
                 const matches = characters.filter(c =>
-                    c.name.toLowerCase().includes(value.toLowerCase())
+                    c.name.toLowerCase().includes(value.toLowerCase()) &&
+                    !guessedCharacters.has(c.name)
                 );
 
                 suggestionsBox.innerHTML = '';
@@ -257,20 +323,26 @@
 
                 matches.forEach(char => {
                     const div = document.createElement('div');
-                    div.className = 'entry';
-                    div.innerHTML = `
-                            <img src="${char.image}" alt="${char.name}" />
-                            <div>
-                              <strong>${char.name}</strong><br/>
-                              <div class="entry-details">
-                                Series: ${char.series} | Age: ${char.age} | Color: ${char.color} | Victories: ${char.victories}
-                              </div>
-                            </div>`;
+                    div.className = 'guess-row preview-entry';
+
+                    const imgBox = document.createElement('div');
+                    imgBox.className = 'portrait';
+                    imgBox.innerHTML = `<img src="${char.image}" alt="${char.name}" />`;
+                    div.appendChild(imgBox);
+
+                    ['name', 'series', 'age', 'color', 'victories'].forEach(attr => {
+                        const box = document.createElement('div');
+                        box.className = 'box';
+                        box.textContent = char[attr];
+                        div.appendChild(box);
+                    });
+
                     div.addEventListener('click', () => {
                         searchInput.value = '';
                         suggestionsBox.style.display = 'none';
                         handleGuess(char);
                     });
+
                     suggestionsBox.appendChild(div);
                 });
 
