@@ -206,6 +206,7 @@
             </div>
         </div>
         <script>
+            let gameOver = false;
             const characters = [
                 {
                     name: 'Yami Yugi',
@@ -298,15 +299,26 @@
             }
 
             function handleGuess(char) {
+                if (gameOver) return;
                 guessedCharacters.add(char.name);
+                const isCorrect = char.name === mysteryCharacter.name;
                 const colors = {
-                    name: char.name === mysteryCharacter.name ? 'green' : 'red',
+                    name: isCorrect ? 'green' : 'red',
                     series: getColor(char.series, mysteryCharacter.series),
                     age: getColor(char.age, mysteryCharacter.age),
                     color: getColor(char.color, mysteryCharacter.color),
                     victories: getMagicColor(char.victories, mysteryCharacter.victories),
                 };
                 addGuessRow(char, colors);
+
+                if (isCorrect) {
+                    gameOver = true;
+                    setTimeout(() => {
+                        if (confirm(`🎉🎉🎉 You guessed ${char.name} correctly! 🎉🎉🎉\n\nPlay again?`)) {
+                            window.location.reload();
+                        }
+                    }, 200);
+                }
             }
 
             function showSuggestions(value) {
