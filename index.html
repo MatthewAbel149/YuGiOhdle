@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guess the Character</title>
+    <title>Yu-Gi-Oh!dle</title>
     <style>
         * {
             box-sizing: border-box;
@@ -157,10 +157,10 @@
 
             #suggestions .guess-row {
                 display: grid;
-                grid-template-columns: 60px 1fr 1fr 1.5fr 1fr 0.8fr;
+                grid-template-columns: repeat(var(--column-count), 1fr);
                 gap: 5px;
                 align-items: center;
-                background-color: #fafafa;
+                background-color: rgba(0.4,0.4,0.4,0.25);
                 cursor: pointer;
                 transition: background 0.2s;
                 min-width: fit-content;
@@ -169,7 +169,7 @@
             }
 
                 #suggestions .guess-row:hover {
-                    background-color: #f0f0f0;
+                    background-color: black;
                 }
 
             #suggestions .box {
@@ -302,6 +302,10 @@
         <div class="game-container">
 
             <h1>Yu-Gi-Oh!dle</h1>
+
+            <button id="hintBtn">Get Hint</button>
+            <p id="hintText" style="margin-top: 10px; font-size: 16px; color: white;"></p>
+
             <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
             <div id="suggestions" class="dropdown" style="display:none;">
                 <div class="guess-row preview-entry">
@@ -327,448 +331,624 @@
     </div>
     <script>
         const characterSets = {
-            yugioh_dm : {
-                attributes: ['image', 'name', 'gender', 'arc', 'height', 'weight', 'occupation', 'role'],
+            yugioh_dm: {
+                attributes: ['image', 'name', 'gender', 'arc', 'episode', 'hair', 'height', 'weight', 'occupation', 'role'],
                 characters: [
                     {
                         name: 'Yami Yugi',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Black',
                         height: '153',
                         weight: '42',
                         occupation: 'Spirit',
                         role: 'Protagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/a6/YamiYugiMD.png/revision/latest?cb=20190602124558'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/a6/YamiYugiMD.png/revision/latest?cb=20190602124558',
+                        hint1: 'Signature Card: Dark Magician',
+                        hint2: '\"It\'s time to Duel!\"',
                     },
                     {
                         name: 'Yugi Muto',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Black',
                         height: '153',
                         weight: '42',
                         occupation: 'Student',
                         role: 'Protagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d1/YugiMuto-DULI.png/revision/latest?cb=20180331132907'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d1/YugiMuto-DULI.png/revision/latest?cb=20180331132907',
+                        hint1: 'Signature Card: Dark Magician',
+                        hint2: '\"It\'s time to Duel!\"',
                     },
                     {
                         name: 'Seto Kaiba',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Brown',
                         height: '186',
                         weight: '65',
-                        occupation: 'Businessman',
+                        occupation: 'Business',
                         role: 'Anti-Hero',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/23/SetoKaiba-DL.png/revision/latest?cb=20190614200609'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/23/SetoKaiba-DL.png/revision/latest?cb=20190614200609',
+                        hint1: 'Signature Card: Blue-Eyes White Dragon',
+                        hint2: '',
                     },
                     {
                         name: 'Maximillion Pegasus',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Gray',
                         height: '188',
                         weight: '65',
-                        occupation: 'Businessman',
+                        occupation: 'Business',
                         role: 'Primary Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/a7/MaximillionPegasusMD.png/revision/latest/scale-to-width-down/1000?cb=20190602123323'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/a7/MaximillionPegasusMD.png/revision/latest/scale-to-width-down/1000?cb=20190602123323',
+                        hint1: 'Signature Card: Thousand-Eyes Restrict',
+                        hint2: '',
                     },
                     {
                         name: 'Joey Wheeler',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Blonde',
                         height: '178',
                         weight: '62',
                         occupation: 'Student',
                         role: 'Protagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/1/1f/JoeyWheeler-DULI.png/revision/latest?cb=20211007115529'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/1/1f/JoeyWheeler-DULI.png/revision/latest?cb=20211007115529',
+                        hint1: 'Signature Card: Red-Eyes Black Dragon',
+                        hint2: '',
                     },
                     {
                         name: 'Yami Bakura',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '12',
+                        hair: 'White',
                         height: '176',
                         weight: '52',
                         occupation: 'Spirit', 
                         role: 'Primary Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/ae/YamiBakura-DULI.png/revision/latest?cb=20170515095008'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/ae/YamiBakura-DULI.png/revision/latest?cb=20170515095008',
+                        hint1: 'Signature Card: Dark Necrofear',
+                        hint2: '',
                     },
                     {
                         name: 'Bakura Ryou',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'White',
                         height: '176',
                         weight: '52',
                         occupation: 'Student',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/e/ef/Ryo2.png/revision/latest?cb=20150425031740'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/e/ef/Ryo2.png/revision/latest?cb=20150425031740',
+                        hint1: 'Signature Card: Change of Heart',
+                        hint2: '',
                     },
                     {
                         name: 'Solomon Muto',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Gray',
                         height: '151',
                         weight: '62',
-                        occupation: 'Businessman',
+                        occupation: 'Business',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/3c/SolomonMutoMD.png/revision/latest?cb=20190602122922'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/3c/SolomonMutoMD.png/revision/latest?cb=20190602122922',
+                        hint1: 'Signature Card: Exodia, The Forbidden One',
+                        hint2: '',
                     },
                     {
                         name: 'Mokuba Kaiba',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Black',
                         height: '142',
                         weight: '28',
-                        occupation: 'Businessman',
+                        occupation: 'Business',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/99/MokubaKaiba-DULI.png/revision/latest?cb=20171001200858'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/99/MokubaKaiba-DULI.png/revision/latest?cb=20171001200858',
+                        hint1: 'Signature Card: Hungry Burger',
+                        hint2: '',
                     },
                     {
                         name: 'Mai Valentine',
                         gender: 'Female',
                         arc: 'Duelist Kingdom',
+                        episode: '3',
+                        hair: 'Blonde',
                         height: '175',
                         weight: '52',
                         occupation: 'Pro Duelist, Minion',
                         role: 'Anti-Villain',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/dd/MaiValentineMD.png/revision/latest?cb=20190602124359'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/dd/MaiValentineMD.png/revision/latest?cb=20190602124359',
+                        hint1: 'Signature Card: Harpie Lady',
+                        hint2: '',
                     },
                     {
                         name: 'Weevil Underwood',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '2',
+                        hair: 'Green',
                         height: '162',
                         weight: '51',
                         occupation: 'Pro Duelist, Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/0a/WeevilUnderwood-DULI.png/revision/latest?cb=20180331133014'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/0a/WeevilUnderwood-DULI.png/revision/latest?cb=20180331133014',
+                        hint1: 'Signature Card: Insect Queen',
+                        hint2: '',
                     },
                     {
                         name: 'Rex Raptor',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '2',
+                        hair: 'Brown',
                         height: '165',
                         weight: '52',
                         occupation: 'Pro Duelist, Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/3e/RexRaptor-DULI.png/revision/latest?cb=20180706092723'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/3e/RexRaptor-DULI.png/revision/latest?cb=20180706092723',
+                        hint1: 'Signature Card: Two-Headed King Rex',
+                        hint2: '',
                     },
                     {
                         name: 'Dartz',
                         gender: 'Male',
                         arc: 'Waking the Dragons',
-                        height: 'Unknown',
-                        weight: 'Unknown',
-                        occupation: 'Businessman',
+                        episode: '145',
+                        hair: 'Blue',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
+                        occupation: 'Business',
                         role: 'Primary Antagonist',
-                        image: 'https://ms.yugipedia.com//thumb/2/2e/Dartz-LOD.png/800px-Dartz-LOD.png'
+                        image: 'https://ms.yugipedia.com//thumb/2/2e/Dartz-LOD.png/800px-Dartz-LOD.png',
+                        hint1: 'Signature Card: Divine Serpent Geh',
+                        hint2: '',
                     },
                     {
                         name: 'Tristan Taylor',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Brown',
                         height: '180',
                         weight: '65',
                         occupation: 'Student',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6b/Tristan-TFSP.png/revision/latest?cb=20150622142834'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6b/Tristan-TFSP.png/revision/latest?cb=20150622142834',
+                        hint1: 'Signature Card: Cyber Commander',
+                        hint2: '',
                     },
                     {
                         name: 'Mako Tsunami',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
+                        episode: '7',
+                        hair: 'Black',
                         height: '178',
                         weight: '68',
                         occupation: 'Pro Duelist',
                         role: 'Anti-villain',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d2/MakoTsunamiMD.png/revision/latest?cb=20190602123708'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d2/MakoTsunamiMD.png/revision/latest?cb=20190602123708',
+                        hint1: 'Signature Card: The Legendary Fisherman',
+                        hint2: '',
                     },
                     {
                         name: 'Shadi',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '40',
+                        hair: 'Unknown',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Spirit',
                         role: 'Other',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/cb/ShadiMD.png/revision/latest?cb=20190602124052'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/cb/ShadiMD.png/revision/latest?cb=20190602124052',
+                        hint1: 'Signature Card: None',
+                        hint2: '',
                     },
                     {
                         name: 'Leon von Schroeder',
                         gender: 'Male',
                         arc: 'Grand Championship',
-                        height: 'Unknown',
-                        weight: 'Unknown',
-                        occupation: 'Businessman',
+                        episode: '185',
+                        hair: 'Red',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
+                        occupation: 'Business',
                         role: 'Anti-Villain',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/76/LeonWilson.png/revision/latest?cb=20160722123954'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/76/LeonWilson.png/revision/latest?cb=20160722123954',
+                        hint1: 'Signature Card: Golden Castle of Stromberg',
+                        hint2: '',
                     },
                     {
                         name: 'Ziegfried von Schroeder',
                         gender: 'Male',
                         arc: 'Grand Championship',
-                        height: 'Unknown',
-                        weight: 'Unknown',
-                        occupation: 'Businessman',
+                        episode: '185',
+                        hair: 'Pink, Red',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
+                        occupation: 'Business',
                         role: 'Primary Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/ce/Schroederzigfried.png/revision/latest/scale-to-width-down/1000?cb=20160722123527'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/ce/Schroederzigfried.png/revision/latest/scale-to-width-down/1000?cb=20160722123527',
+                        hint1: 'Signature Card: Ride of the Valkyries',
+                        hint2: '',
                     },
                     {
                         name: 'Espa Roba',
                         gender: 'Male',
                         arc: 'Battle City',
+                        episode: '54',
+                        hair: 'Green',
                         height: '172',
                         weight: '48',
                         occupation: 'None',
                         role: 'Anti-Villain',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/c8/EspaRoba-DULI.png/revision/latest/scale-to-width-down/1000?cb=20171121164121'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/c8/EspaRoba-DULI.png/revision/latest/scale-to-width-down/1000?cb=20171121164121',
+                        hint1: 'Signature Card: Jinzo',
+                        hint2: '',
                     },
                     {
                         name: 'PaniK',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '13',
+                        hair: 'Blue',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Pro Duelist, Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/9e/PaniK.png/revision/latest?cb=20131125144703'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/9e/PaniK.png/revision/latest?cb=20131125144703',
+                        hint1: 'Signature Card: Castle of Dark Illusions',
+                        hint2: '',
                     },
                     {
                         name: 'Rafael',
                         gender: 'Male',
                         arc: 'Waking the Dragons',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '145',
+                        hair: 'Blonde',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Anti-Villain',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/cb/Rafael.png/revision/latest/scale-to-width-down/1000?cb=20190525154546'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/cb/Rafael.png/revision/latest/scale-to-width-down/1000?cb=20190525154546',
+                        hint1: 'Signature Card: Guardian Eatos',
+                        hint2: '',
                     },
                     {
                         name: 'Odion',
                         gender: 'Male',
                         arc: 'Battle City',
+                        episode: '60',
+                        hair: 'Bald, Black',
                         height: '183',
-                        weight: 'Unknown',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Anti-Villain',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6d/Odion-TFSP.png/revision/latest?cb=20150622192137'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6d/Odion-TFSP.png/revision/latest?cb=20150622192137',
+                        hint1: 'Signature Card: Embodiment of Apophis',
+                        hint2: '',
                     },
                     {
                         name: 'Bandit Keith',
                         gender: 'Male',
                         arc: 'Duelist Kingsom',
+                        episode: '16',
+                        hair: 'Blonde',
                         height: '190',
                         weight: '85',
                         occupation: 'Pro Duelist, Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/4/40/BanditKeithMD.png/revision/latest?cb=20190602123207'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/4/40/BanditKeithMD.png/revision/latest?cb=20190602123207',
+                        hint1: 'Signature Card: Barrel Dragon',
+                        hint2: '',
                     },
                     {
                         name: 'Noah Kaiba',
                         gender: 'Male',
                         arc: 'Battle City',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '98',
+                        hair: 'Blue',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'None',
                         role: 'Primary Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/78/Noahvillainswiki.png/revision/latest?cb=20171231144007'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/78/Noahvillainswiki.png/revision/latest?cb=20171231144007',
+                        hint1: 'Signature Card: Shinato\'s Ark',
+                        hint2: '',
                     },
                     {
                         name: 'Gozaburo Kaiba',
                         gender: 'Male',
                         arc: 'Battle City',
-                        height: 'Unknown',
-                        weight: 'Unknown',
-                        occupation: 'Businessman',
+                        episode: '97',
+                        hair: 'Gray',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
+                        occupation: 'Business',
                         role: 'Primary Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d7/Gozaburo11.png/revision/latest?cb=20130927134501'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d7/Gozaburo11.png/revision/latest?cb=20130927134501',
+                        hint1: 'Signature Card: Exodia Necross',
+                        hint2: '',
                     },
                     {
                         name: 'Marik Ishtar',
                         gender: 'Male',
                         arc: 'Battle City',
+                        episode: '50',
+                        hair: 'White',
                         height: '180',
                         weight: '55',
                         occupation: 'None',
                         role: 'Primary Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/37/MarikIshtar-DULI.png/revision/latest?cb=20180106234644'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/37/MarikIshtar-DULI.png/revision/latest?cb=20180106234644',
+                        hint1: 'Signature Card: The Winged Dragon of Ra',
+                        hint2: '',
                     },
                     {
                         name: 'Yami Marik',
                         gender: 'Male',
                         arc: 'Battle City',
+                        episode: '89',
+                        hair: 'White',
                         height: '180',
                         weight: '55',
                         occupation: 'Spirit',
                         role: 'Primary Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/f7/YamiMarik-DULI.png/revision/latest?cb=20170728075955'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/f7/YamiMarik-DULI.png/revision/latest?cb=20170728075955',
+                        hint1: 'Signature Card: The Winged Dragon of Ra',
+                        hint2: '',
                     },
                     {
                         name: 'Ishizu Ishtar',
                         gender: 'Female',
                         arc: 'Battle City',
+                        episode: '52',
+                        hair: 'Black',
                         height: '167',
                         weight: '43',
-                        occupation: 'Businessman',
+                        occupation: 'Business',
                         role: 'Protagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/2b/IshizuIshtarMD.png/revision/latest?cb=20190602124008'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/2b/IshizuIshtarMD.png/revision/latest?cb=20190602124008',
+                        hint1: 'Signature Card: Mudora',
+                        hint2: '',
                     },
                     {
                         name: 'Rebecca Hawkins',
                         gender: 'Female',
                         arc: 'Battle City',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '41',
+                        hair: 'Blonde',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'None',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/2f/RebeccaHawkinsMD.png/revision/latest?cb=20190602121454'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/2f/RebeccaHawkinsMD.png/revision/latest?cb=20190602121454',
+                        hint1: 'Signature Card: Shadow Ghoul',
+                        hint2: '',
                     },
                     {
                         name: 'Arthur Hawkins',
                         gender: 'Male',
                         arc: 'Battle City',
-                        height: 'Unknown',
-                        weight: 'Unknown',
-                        occupation: 'Businessman',
+                        episode: '41',
+                        hair: 'Gray',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
+                        occupation: 'Business',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/9d/Arthur-Hawkins1.jpg/revision/latest?cb=20230810181600'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/9d/Arthur-Hawkins1.jpg/revision/latest?cb=20230810181600',
+                        hint1: 'Signature Card: Blue-Eyes White Dragon',
+                        hint2: '',
                     },
                     {
                         name: 'Tea Gardner',
                         gender: 'Female',
                         arc: 'Duelist Kingdom',
+                        episode: '1',
+                        hair: 'Brown',
                         height: '165',
                         weight: '47',
                         occupation: 'Student',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/e/e3/T%C3%A9aGardner-DULI.png/revision/latest?cb=20180331132758'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/e/e3/T%C3%A9aGardner-DULI.png/revision/latest?cb=20180331132758',
+                        hint1: 'Signature Card: Magician of Faith',
+                        hint2: '',
                     },
                     {
                         name: 'Duke Devlin',
                         gender: 'Male',
                         arc: 'Battle City',
+                        episode: '46',
+                        hair: 'Black',
                         height: '179',
                         weight: '64',
-                        occupation: 'Businessman',
+                        occupation: 'Business',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/00/Duke-TFSP.png/revision/latest?cb=20150622144236'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/00/Duke-TFSP.png/revision/latest?cb=20150622144236',
+                        hint1: 'Signature Card: Orgoth the Relentless',
+                        hint2: '',
                     },
                     {
                         name: 'Valon',
                         gender: 'Male',
                         arc: 'Waking the Dragons',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '145',
+                        hair: 'Brown',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Anti-Hero',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6d/Valon.png/revision/latest?cb=20190531105548'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6d/Valon.png/revision/latest?cb=20190531105548',
+                        hint1: 'Signature Card: Psychic Armor Head',
+                        hint2: '',
                     },
                     {
                         name: 'Serenity Wheeler',
                         gender: 'Female',
                         arc: 'Duelist Kingdom',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '3',
+                        hair: 'Brown',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'None',
                         role: 'Family/Friend',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/8/8b/Serenity.png/revision/latest?cb=20170307114636'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/8/8b/Serenity.png/revision/latest?cb=20170307114636',
+                        hint1: 'Signature Card: Goddess with the Third Eye',
+                        hint2: '',
                     },
                     {
                         name: 'Alister',
                         gender: 'Male',
                         arc: 'Waking the Dragons',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '145',
+                        hair: 'Red',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/5/5a/Alister.png/revision/latest?cb=20190531112647'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/5/5a/Alister.png/revision/latest?cb=20190531112647',
+                        hint1: 'Signature Card: Air Fortress Ziggurat',
+                        hint2: '',
                     },
                     {
                         name: 'Vivian Wong',
                         gender: 'Female',
                         arc: 'Grand Tournament',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '186',
+                        hair: 'Black',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Pro Duelist',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/5/57/VivianWong.png/revision/latest/scale-to-width-down/1000?cb=20160722123836'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/5/57/VivianWong.png/revision/latest/scale-to-width-down/1000?cb=20160722123836',
+                        hint1: 'Signature Card: Dragon Lady',
+                        hint2: '',
                     },
                     {
                         name: 'Umbra',
                         gender: 'Male',
                         arc: 'Battle City',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '70',
+                        hair: 'Unknown',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/7c/Umbra3.png/revision/latest?cb=20131202163919'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/7c/Umbra3.png/revision/latest?cb=20131202163919',
+                        hint1: 'Signature Card: The Masked Beast',
+                        hint2: '',
                     },
                     {
                         name: 'Lumis',
                         gender: 'Male',
                         arc: 'Battle City',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '70',
+                        hair: 'Unknown',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6f/Lumis3.png/revision/latest/scale-to-width-down/1000?cb=20150408015623'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6f/Lumis3.png/revision/latest/scale-to-width-down/1000?cb=20150408015623',
+                        hint1: 'Signature Card: The Masked Beast',
+                        hint2: '',
                     },
                     {
                         name: 'Arkana',
                         gender: 'Male',
                         arc: 'Battle City',
-                        height: 'Unknown',
-                        weight: 'Unknown',
-                        occupation: 'Businessman, Minion',
+                        episode: '60',
+                        hair: 'Black',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
+                        occupation: 'Business, Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/00/Arkana-DULI.png/revision/latest?cb=20170720113617'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/00/Arkana-DULI.png/revision/latest?cb=20170720113617',
+                        hint1: 'Signature Card: Dark Magician',
+                        hint2: '',
                     },
                     {
                         name: 'Bonz',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '29',
+                        hair: 'Blue',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/fe/Bonz-LOD.png/revision/latest?cb=20210203003405'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/fe/Bonz-LOD.png/revision/latest?cb=20210203003405',
+                        hint1: 'Signature Card: Pumpking, King of Ghosts',
+                        hint2: '',
                     },
                     {
                         name: 'Strings',
                         gender: 'Male',
                         arc: 'Battle City',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '65',
+                        hair: 'Bald',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/f0/Strings-DULI.png/revision/latest?cb=20171228102429'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/f0/Strings-DULI.png/revision/latest?cb=20171228102429',
+                        hint1: 'Signature Card: Revival Jam',
+                        hint2: '',
                     },
                     {
                         name: 'Gurimo',
                         gender: 'Male',
                         arc: 'Waking the Dragons',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '145',
+                        hair: 'Brown',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/33/Gurimo3.png/revision/latest?cb=20131203150054'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/33/Gurimo3.png/revision/latest?cb=20131203150054',
+                        hint1: 'Signature Card: Seal of Orichalcos',
+                        hint2: '',
                     },
                     {
                         name: 'Para',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '19',
+                        hair: 'Bald',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Pro Duelist, Minion',
                         role: 'Antagonist',
-                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/02/Para-TFSP.png/revision/latest?cb=20150622192652'
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/02/Para-TFSP.png/revision/latest?cb=20150622192652',
+                        hint1: 'Signature Card: Gate Guardian',
+                        hint2: '',
                     },
                     {
                         name: 'Dox',
                         gender: 'Male',
                         arc: 'Duelist Kingdom',
-                        height: 'Unknown',
-                        weight: 'Unknown',
+                        episode: '19',
+                        hair: 'Bald',
+                        height: 'Not confirmed',
+                        weight: 'Not confirmed',
                         occupation: 'Pro Duelist, Minion',
                         role: 'Antagonist',
-                        image: ''
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/a2/Dox-TFSP.png/revision/latest?cb=20150622192655',
+                        hint1: 'Signature Card: Gate Guardian',
+                        hint2: '',
                     },
                 ]
             },
@@ -822,6 +1002,12 @@
         const suggestionsBox = document.getElementById('suggestions');
         const gridContainer = document.getElementById('grid');
 
+        document.getElementById('hintBtn').addEventListener('click', () => {
+            if (!mysteryCharacter || !mysteryCharacter.hint1) return;
+
+            let hint = mysteryCharacter.hint1;
+            document.getElementById('hintText').textContent = `Hint: ${hint}`;
+        });
         /*Detect set selection*/
         document.querySelectorAll('.set-card').forEach(card => {
             card.addEventListener('click', () => {
@@ -854,6 +1040,7 @@
             searchInput.disabled = false;
             suggestionsBox.innerHTML = '';
             gridContainer.innerHTML = '';
+            document.getElementById('hintText').textContent = '';
 
             renderHeaderRow();
             document.getElementById('resultScreen').style.display = 'none';
@@ -862,6 +1049,8 @@
         function renderHeaderRow() {
             gridContainer.innerHTML = ''; // Clear previous header
             gridContainer.style.setProperty('--column-count', activeAttributes.length);
+            suggestions.innerHTML = ''; // Clear previous header
+            suggestions.style.setProperty('--column-count', activeAttributes.length);
 
             const header = document.createElement('div');
             header.className = 'guess-row labels';
@@ -920,7 +1109,7 @@
                 row.appendChild(box);
             });
 
-            gridContainer.appendChild(row);
+            gridContainer.insertBefore(row, gridContainer.children[1]);
         }
 
         function handleGuess(char) {
@@ -948,6 +1137,11 @@
                 c.name.toLowerCase().includes(value.toLowerCase()) &&
                 !guessedCharacters.has(c.name)
             );
+            matches.sort(function (a, b) {
+                var textA = a.name.toUpperCase();
+                var textB = b.name.toUpperCase();
+                return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+            });
 
             suggestionsBox.innerHTML = '';
             if (matches.length === 0 || value.trim() === '') {
@@ -992,6 +1186,12 @@
             if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
                 suggestionsBox.style.display = 'none';
             }
+        });
+        /* Default to loading DM */
+        window.addEventListener('DOMContentLoaded', () => {
+            const defaultSet = 'yugioh_dm'; // key from characterSets
+            const setCard = document.querySelector(`.set-card[data-set="${defaultSet}"]`);
+            if (setCard) setCard.click();
         });
     </script>
 
