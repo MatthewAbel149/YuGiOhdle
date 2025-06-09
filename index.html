@@ -17,7 +17,7 @@
             justify-content: center;
             align-items: center;
             background: #f5f5f5;
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSynlnk_kuBO_U7_UAKNXTAUg3KN95UiQKF7A&s');
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSynlnk_kuBO_U7_UAKNXTAUg3KN95UiQKF7A&s'); /*Background for site*/
         }
 
         .game-container {
@@ -60,16 +60,16 @@
             cursor: pointer;
         }
 
-        .entry:hover {
-            background: #f0f0f0;
-        }
+            .entry:hover {
+                background: #f0f0f0;
+            }
 
-        .entry img {
-            width: 50px;
-            height: 50px;
-            border-radius: 6px;
-            object-fit: cover;
-        }
+            .entry img {
+                width: 50px;
+                height: 50px;
+                border-radius: 6px;
+                object-fit: cover;
+            }
 
         .entry-details {
             font-size: 14px;
@@ -110,12 +110,12 @@
             padding: 0;
         }
 
-        .portrait img {
-            width: 50px;
-            height: 50px;
-            border-radius: 4px;
-            object-fit: cover;
-        }
+            .portrait img {
+                width: 50px;
+                height: 50px;
+                border-radius: 4px;
+                object-fit: cover;
+            }
 
         .green {
             background-color: #4caf50;
@@ -143,234 +143,286 @@
             gap: 10px;
         }
 
-        #suggestions .guess-row {
-            display: grid;
-            grid-template-columns: 60px 1fr 1fr 1.5fr 1fr 0.8fr;
-            gap: 5px;
-            align-items: center;
-            background-color: #fafafa;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+            #suggestions .guess-row {
+                display: grid;
+                grid-template-columns: 60px 1fr 1fr 1.5fr 1fr 0.8fr;
+                gap: 5px;
+                align-items: center;
+                background-color: #fafafa;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
 
-        #suggestions .guess-row:hover {
-            background-color: #f0f0f0;
-        }
+                #suggestions .guess-row:hover {
+                    background-color: #f0f0f0;
+                }
 
-        #suggestions .box {
-            padding: 10px;
-            text-align: center;
-            color: #333;
-            font-weight: normal;
-            background: #fff;
-            border-radius: 4px;
-        }
+            #suggestions .box {
+                padding: 10px;
+                text-align: center;
+                color: #333;
+                font-weight: normal;
+                background: #fff;
+                border-radius: 4px;
+            }
 
-        #suggestions .portrait img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 4px;
-        }
-
+            #suggestions .portrait img {
+                width: 50px;
+                height: 50px;
+                object-fit: cover;
+                border-radius: 4px;
+            }
     </style>
 </head>
 <body>
-        <div class="game-container">
+    <div class="game-container">
 
-            <h1>Guess the Character</h1>
-
-            <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
-            <div id="suggestions" class="dropdown" style="display:none;">
-                <div class="guess-row preview-entry">
-                    <div class="portrait">
-                        <img src="portrait-url.jpg" alt="Name" />
-                    </div>
-                    <div class="box">Name</div>
-                    <div class="box">Series</div>
-                    <div class="box">Age(s)</div>
-                    <div class="box">Color</div>
-                    <div class="box">Victories</div>
+        <h1>Guess the Character</h1>
+        <select id="setSelector">
+            <option value="">Select Character Set</option>
+            <option value="yugioh">Yu-Gi-Oh!</option>
+            <option value="dragonball">Dragon Ball</option>
+            <option value="pokemon">Pokémon</option>
+            <option value="digimon">Digimon</option>
+        </select>
+        <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
+        <div id="suggestions" class="dropdown" style="display:none;">
+            <div class="guess-row preview-entry">
+                <div class="portrait">
+                    <img src="portrait-url.jpg" alt="Name" />
                 </div>
-            </div>
-            <div class="grid-container">
-                <div class="guess-row labels">
-                    <div class="box" style="background:#ddd; color:#000;"></div>
-                    <div class="box" style="background:#ddd; color:#000;">Name</div>
-                    <div class="box" style="background:#ddd; color:#000;">Series</div>
-                    <div class="box" style="background:#ddd; color:#000;">Age</div>
-                    <div class="box" style="background:#ddd; color:#000;">Color</div>
-                    <div class="box" style="background:#ddd; color:#000;">Victories</div>
-                </div>
-                <div id="grid" class="grid-subcontainer"></div>
+                <div class="box">Name</div>
+                <div class="box">Series</div>
+                <div class="box">Age(s)</div>
+                <div class="box">Height</div>
+                <div class="box">Victories</div>
             </div>
         </div>
-        <script>
-            let gameOver = false;
-            const characters = [
-                {
-                    name: 'Yami Yugi',
-                    series: 'Duel Monsters',
-                    age: '1000+',
-                    color: 'Green',
-                    victories: 34,
-                    image: 'https://uploads1.yugioh.com/character/3/detail/list/yamiyugi-m.png?1371661244'
-                },
-                {
-                    name: 'Yugi',
-                    series: 'Duel Monsters',
-                    age: '16',
-                    color: 'Red',
-                    victories: 34,
-                    image: 'https://uploads1.yugioh.com/character/2/detail/list/yugi-m.png?1371660956'
-                },
-                {
-                    name: 'Jaden',
-                    series: 'GX',
-                    age: '15',
-                    color: 'Blue',
-                    victories: 78,
-                    image: 'https://uploads2.yugioh.com/character/24/detail/list/jaden-m.png?1371840762'
-                },
-                {
-                    name: 'Yusei',
-                    series: '5Ds',
-                    age: '18',
-                    color: 'Silver',
-                    victories: 52,
-                    image: 'https://uploads2.yugioh.com/character/31/detail/list/yusei-m.png?1371843969'
-                }
-            ];
-
-            const mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
-            const searchInput = document.getElementById('searchInput');
-            const suggestionsBox = document.getElementById('suggestions');
-            const gridContainer = document.getElementById('grid');
-            const guessedCharacters = new Set();
-
-            function getColor(value, answerValue) {
-                if (value === answerValue) return 'green';
-
-                const valSet = new Set(value.toLowerCase().split(',').map(s => s.trim()));
-                const ansSet = new Set(answerValue.toLowerCase().split(',').map(s => s.trim()));
-                const match = [...valSet].filter(v => ansSet.has(v));
-
-                return match.length > 0 ? 'yellow' : 'red';
-            }
-
-            function getMagicColor(value, answerValue) {
-                return value === answerValue ? 'green' : 'red';
-            }
-
-            function addGuessRow(char, colors) {
-                const row = document.createElement('div');
-                row.className = 'guess-row';
-
-                const imgBox = document.createElement('div');
-                imgBox.className = 'portrait';
-                imgBox.innerHTML = `<img src="${char.image}" alt="${char.name}" />`;
-                row.appendChild(imgBox);
-
-                ['name', 'series', 'age', 'color', 'victories'].forEach(attr => {
-                    const box = document.createElement('div');
-                    box.className = `box ${colors[attr]}`;
-                    let value = char[attr];
-                    let arrow = '';
-
-                    if (attr === 'victories') {
-                        if (char.victories < mysteryCharacter.victories) arrow = ' ▲';
-                        else if (char.victories > mysteryCharacter.victories) arrow = ' ▼';
+        <div class="grid-container">
+            <div class="guess-row labels" style="display:none;">
+                <div class="box" style="background:#ddd; color:#000;"></div>
+                <div class="box" style="background:#ddd; color:#000;">Name</div>
+                <div class="box" style="background:#ddd; color:#000;">Series</div>
+                <div class="box" style="background:#ddd; color:#000;">Age</div>
+                <div class="box" style="background:#ddd; color:#000;">Height</div>
+                <div class="box" style="background:#ddd; color:#000;">Victories</div>
+            </div>
+            <div id="grid" class="grid-subcontainer"></div>
+        </div>
+    </div>
+    <script>
+        const characterSets = {
+            yugioh: {
+                attributes: ['image', 'name', 'series', 'age', 'height', 'victories'],
+                characters: [
+                    {
+                        name: 'Yami Yugi',
+                        series: 'Duel Monsters',
+                        age: '1000+',
+                        height: 153,
+                        victories: 34,
+                        image: 'https://uploads1.yugioh.com/character/3/detail/list/yamiyugi-m.png?1371661244'
+                    },
+                    {
+                        name: 'Yugi Muto',
+                        series: 'Duel Monsters',
+                        age: '16',
+                        height: 153,
+                        victories: 34,
+                        image: 'https://uploads1.yugioh.com/character/2/detail/list/yugi-m.png?1371660956'
+                    },
+                    {
+                        name: 'Jaden Yuki',
+                        series: 'GX',
+                        age: '15',
+                        height: 165,
+                        victories: 78,
+                        image: 'https://uploads2.yugioh.com/character/24/detail/list/jaden-m.png?1371840762'
+                    },
+                    {
+                        name: 'Yusei Fudo',
+                        series: '5Ds',
+                        age: '18',
+                        height: 175,
+                        victories: 52,
+                        image: 'https://uploads2.yugioh.com/character/31/detail/list/yusei-m.png?1371843969'
                     }
+                ]
+            },
+            dragonball: {
+                attributes: ['name'],
+                characters: [
+                    { name: 'Goku' },
+                    { name: 'Krillin' }
+                ],
+            },
+            pokemon: {
+                attributes: ['name'],
+                characters:
+                    [{ name: 'Ash' },
+                    { name: 'Misty' }]
+            },
+            digimon: [
+                { name: 'Matt' },
+                { name: 'Leo' }
+            ]
+        };
+        let characters = [];
+        let mysteryCharacter = null;
+        let activeAttributes = [];
+        const guessedCharacters = new Set();
+        let gameOver = false;
 
-                    if (attr === 'age') {
-                        const guessAge = parseInt(char.age);
-                        const correctAge = parseInt(mysteryCharacter.age);
-                        if (!isNaN(guessAge) && !isNaN(correctAge)) {
-                            if (guessAge < correctAge) arrow = ' ▲';
-                            else if (guessAge > correctAge) arrow = ' ▼';
-                        }
-                    }
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsBox = document.getElementById('suggestions');
+        const gridContainer = document.getElementById('grid');
 
-                    box.textContent = value + arrow;
-                    row.appendChild(box);
-                });
+        document.getElementById('setSelector').addEventListener('change', (e) => {
+            const selectedSet = e.target.value;
 
-                gridContainer.appendChild(row);
-            }
+            if (!selectedSet || !characterSets[selectedSet]) return;
 
-            function handleGuess(char) {
-                if (gameOver) return;
-                guessedCharacters.add(char.name);
-                const isCorrect = char.name === mysteryCharacter.name;
-                const colors = {
-                    name: isCorrect ? 'green' : 'red',
-                    series: getColor(char.series, mysteryCharacter.series),
-                    age: getColor(char.age, mysteryCharacter.age),
-                    color: getColor(char.color, mysteryCharacter.color),
-                    victories: getMagicColor(char.victories, mysteryCharacter.victories),
+            const set = characterSets[selectedSet];
+            characters = set.characters;
+            activeAttributes = set.attributes;
+            mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
+
+            guessedCharacters.clear();
+            gameOver = false;
+            searchInput.value = '';
+            searchInput.disabled = false;
+            gridContainer.innerHTML = '';
+
+            renderHeaderRow();
+        });
+
+        function renderHeaderRow() {
+            const header = document.createElement('div');
+            header.className = 'guess-row labels';
+
+            activeAttributes.forEach(attr => {
+                const box = document.createElement('div');
+                box.className = 'box header';
+                box.textContent = attr === 'image' ? '' : attr.charAt(0).toUpperCase() + attr.slice(1);
+                header.appendChild(box);
+            });
+
+            gridContainer.appendChild(header);
+        }
+
+        function getAttributeFeedback(guessValue, answerValue) {
+            // Numeric comparison
+            if (!isNaN(guessValue) && !isNaN(answerValue)) {
+                if (Number(guessValue) === Number(answerValue)) return { color: 'green', arrow: '' };
+                return {
+                    color: 'red',
+                    arrow: Number(guessValue) < Number(answerValue) ? ' ▲' : ' ▼'
                 };
-                addGuessRow(char, colors);
-
-                if (isCorrect) {
-                    gameOver = true;
-                    setTimeout(() => {
-                        if (confirm(`🎉🎉🎉 You guessed ${char.name} correctly! 🎉🎉🎉\n\nPlay again?`)) {
-                            window.location.reload();
-                        }
-                    }, 200);
-                }
             }
 
-            function showSuggestions(value) {
-                const matches = characters.filter(c =>
-                    c.name.toLowerCase().includes(value.toLowerCase()) &&
-                    !guessedCharacters.has(c.name)
-                );
+            // Exact match (case-insensitive string)
+            if (guessValue.toLowerCase?.() === answerValue.toLowerCase?.()) {
+                return { color: 'green', arrow: '' };
+            }
 
-                suggestionsBox.innerHTML = '';
-                if (matches.length === 0 || value.trim() === '') {
-                    suggestionsBox.style.display = 'none';
-                    return;
+            // Partial match (for comma-separated string values)
+            const guessSet = new Set(guessValue.toLowerCase().split(',').map(s => s.trim()));
+            const answerSet = new Set(answerValue.toLowerCase().split(',').map(s => s.trim()));
+            const overlap = [...guessSet].filter(val => answerSet.has(val));
+
+            return {
+                color: overlap.length > 0 ? 'yellow' : 'red',
+                arrow: ''
+            };
+        }
+
+        function addGuessRow(char) {
+            const row = document.createElement('div');
+            row.className = 'guess-row';
+
+            activeAttributes.forEach(attr => {
+                const box = document.createElement('div');
+                const { color, arrow } = getAttributeFeedback(char[attr], mysteryCharacter[attr]);
+                if (attr === 'image') {
+                    box.className = 'portrait';
+                    box.innerHTML = `<img src="${char[attr]}" alt="${char.name}" />`;
+                } else {
+                    box.className = `box ${color}`;
+                    box.textContent = char[attr] + arrow;
                 }
+                row.appendChild(box);
+            });
 
-                matches.forEach(char => {
-                    const div = document.createElement('div');
-                    div.className = 'guess-row preview-entry';
+            gridContainer.appendChild(row);
+        }
 
-                    const imgBox = document.createElement('div');
-                    imgBox.className = 'portrait';
-                    imgBox.innerHTML = `<img src="${char.image}" alt="${char.name}" />`;
-                    div.appendChild(imgBox);
+        function handleGuess(char) {
+            if (gameOver) return;
+            guessedCharacters.add(char.name);
 
-                    ['name', 'series', 'age', 'color', 'victories'].forEach(attr => {
-                        const box = document.createElement('div');
+            addGuessRow(char);
+
+            if (char.name === mysteryCharacter.name) {
+                gameOver = true;
+                setTimeout(() => {
+                    if (confirm(`🎉🎉🎉 You guessed ${char.name} correctly! 🎉🎉🎉\n\nPlay again?`)) {
+                        window.location.reload();
+                    }
+                }, 200);
+            }
+        }
+
+        function showSuggestions(value) {
+            const matches = characters.filter(c =>
+                c.name.toLowerCase().includes(value.toLowerCase()) &&
+                !guessedCharacters.has(c.name)
+            );
+
+            suggestionsBox.innerHTML = '';
+            if (matches.length === 0 || value.trim() === '') {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
+
+            matches.forEach(char => {
+                const div = document.createElement('div');
+                div.className = 'guess-row preview-entry';
+
+                activeAttributes.forEach(attr => {
+                    const box = document.createElement('div');
+                    if (attr === 'image') {
+                        box.className = 'portrait';
+                        box.innerHTML = `<img src="${char[attr]}" alt="${char.name}" />`;
+                    } else {
                         box.className = 'box';
-                        box.textContent = char[attr];
-                        div.appendChild(box);
-                    });
+                        box.textContent = char[attr] || '—';
+                    }
 
-                    div.addEventListener('click', () => {
-                        searchInput.value = '';
-                        suggestionsBox.style.display = 'none';
-                        handleGuess(char);
-                    });
-
-                    suggestionsBox.appendChild(div);
+                    div.appendChild(box);
                 });
 
-                suggestionsBox.style.display = 'block';
-            }
-
-            searchInput.addEventListener('input', e => {
-                showSuggestions(e.target.value);
-            });
-
-            document.addEventListener('click', e => {
-                if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+                div.addEventListener('click', () => {
+                    searchInput.value = '';
                     suggestionsBox.style.display = 'none';
-                }
+                    handleGuess(char);
+                });
+
+                suggestionsBox.appendChild(div);
             });
-        </script>
+
+            suggestionsBox.style.display = 'block';
+        }
+
+        searchInput.addEventListener('input', e => {
+            showSuggestions(e.target.value);
+        });
+
+        document.addEventListener('click', e => {
+            if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
+                suggestionsBox.style.display = 'none';
+            }
+        });
+    </script>
 
 </body>
 </html>
