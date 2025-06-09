@@ -9,25 +9,31 @@
             box-sizing: border-box;
         }
 
-        body {
+        html, body {
             font-family: sans-serif;
             margin: 0;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             background: #f5f5f5;
+            background-attachment: fixed;
             background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSynlnk_kuBO_U7_UAKNXTAUg3KN95UiQKF7A&s'); /*Background for site*/
+            /*background-size: cover;*/
+            background-position: center;
+            /*background-repeat: no-repeat;*/
+            background-attachment: fixed;
         }
 
         .game-container {
-            background-color: rgba(0,0,0,0.7);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
-            max-width: 1000px;
             width: 100%;
-            text-align: center;
+            max-width: 900px; /* limits the max size on big screens */
+            margin: 0 auto; /* center horizontally */
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7); /* or your preferred semi-transparent white */
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
         }
 
         h1 {
@@ -86,8 +92,8 @@
         /*Settings for player's previous guess display*/
         .guess-row {
             display: grid;
-            grid-template-columns: 60px 1fr 1fr 1.5fr 1fr 0.8fr;
-            gap: 5px;
+            grid-template-columns: repeat(var(--column-count), 1fr);
+            gap: 10px;
             width: 100%;
         }
 
@@ -97,8 +103,16 @@
             font-weight: bold;
         }
 
+        .box,
+        .header {
+            display: flex;
+            align-items: center; /* vertical center */
+            justify-content: center; /* horizontal center */
+            text-align: center;
+        }
+
         .box, .portrait {
-            padding: 10px;
+            padding: 0px;
             border-radius: 4px;
             text-align: center;
             font-weight: bold;
@@ -107,13 +121,13 @@
         }
 
         .portrait {
-            padding: 0;
+            grid-column: span 1;
         }
 
             .portrait img {
                 width: 50px;
-                height: 50px;
-                border-radius: 4px;
+                height: 75px;
+                border-radius: 0px;
                 object-fit: cover;
             }
 
@@ -172,47 +186,147 @@
                 object-fit: cover;
                 border-radius: 4px;
             }
+        /*Settings for the Selector panel*/
+        .container {
+            display: flex;
+            height: 100vh;
+            margin-left: 180px;
+            overflow: hidden;
+        }
+
+        .set-selector {
+            width: 180px;
+            background: #222;
+            padding: 10px;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            left: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .set-card {
+            cursor: pointer;
+            background: #333;
+            border-radius: 8px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+            .set-card:hover {
+                transform: scale(1.05);
+            }
+
+            .set-card img {
+                width: 100%;
+                height: 100px;
+                object-fit: cover;
+                display: block;
+            }
+
+            .set-card span {
+                display: block;
+                padding: 5px;
+                color: white;
+                font-size: 14px;
+            }
+            /*Settings for the results screen*/
+        .result-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            text-align: center;
+        }
+
+            .result-screen img {
+                width: 200px;
+                height: auto;
+                margin: 20px 0;
+                border-radius: 8px;
+                object-fit: cover;
+                box-shadow: 0 0 12px #000;
+            }
+
+        #restartBtn {
+            padding: 10px 20px;
+            background: #4caf50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
-    <div class="game-container">
 
-        <h1>Guess the Character</h1>
-        <select id="setSelector">
-            <option value="">Select Character Set</option>
-            <option value="yugioh">Yu-Gi-Oh!</option>
-            <option value="dragonball">Dragon Ball</option>
-            <option value="pokemon">Pokémon</option>
-            <option value="digimon">Digimon</option>
-        </select>
-        <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
-        <div id="suggestions" class="dropdown" style="display:none;">
-            <div class="guess-row preview-entry">
-                <div class="portrait">
-                    <img src="portrait-url.jpg" alt="Name" />
-                </div>
-                <div class="box">Name</div>
-                <div class="box">Series</div>
-                <div class="box">Age(s)</div>
-                <div class="box">Height</div>
-                <div class="box">Victories</div>
+    <div class="container">
+        <div class="set-selector">
+            <div class="set-card" data-set="yugioh_dm">
+                <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/07/Yugioh.jpg" alt="Yu-Gi-Oh!" />
+                <span>Duel Monsters</span>
+            </div>
+            <div class="set-card" data-set="yugioh_gx">
+                <img src="https://static.wikia.nocookie.net/dubbing9585/images/a/a1/Yugiohgx.jpg/revision/latest?cb=20190322043418" alt="Yu-Gi-Oh! GX" />
+                <span>GX</span>
+            </div>
+            <div class="set-card" data-set="yugioh_5ds">
+                <img src="https://m.media-amazon.com/images/S/pv-target-images/48ef0c5fb7d27d266a1cba503bebb1a96618b811339c6621965467b45979e241.jpg" alt="Yu-Gi-Oh! 5Ds" />
+                <span>5Ds</span>
+            </div>
+            <div class="set-card" data-set="yugioh_zexal">
+                <img src="https://de7i3bh7bgh0d.cloudfront.net/2016/11/02/20/55/04/30de93b6-e6a9-416e-86b9-387b63239f27/YuGiOhZexal.jpg" alt="Yu-Gi-Oh! Zexal" />
+                <span>Zexal</span>
             </div>
         </div>
-        <div class="grid-container">
-            <div class="guess-row labels" style="display:none;">
-                <div class="box" style="background:#ddd; color:#000;"></div>
-                <div class="box" style="background:#ddd; color:#000;">Name</div>
-                <div class="box" style="background:#ddd; color:#000;">Series</div>
-                <div class="box" style="background:#ddd; color:#000;">Age</div>
-                <div class="box" style="background:#ddd; color:#000;">Height</div>
-                <div class="box" style="background:#ddd; color:#000;">Victories</div>
+
+    </div>
+
+    <div class="game-panel">
+        <div class="game-container">
+
+            <h1>Yu-Gi-Oh!dle</h1>
+            <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
+            <div id="suggestions" class="dropdown" style="display:none;">
+                <div class="guess-row preview-entry">
+                    <div class="portrait">
+                        <img src="portrait-url.jpg" alt="Name" />
+                    </div>
+                    <div class="box"></div>
+                </div>
             </div>
-            <div id="grid" class="grid-subcontainer"></div>
+            <div class="grid-container">
+                <div class="guess-row labels" style="display:none;">
+                    <div class="box" style="background:#ddd; color:#000;"></div>
+                </div>
+                <div id="grid" class="grid-subcontainer"></div>
+            </div>
+        </div>
+        <div id="resultScreen" class="result-screen" style="display: none;">
+            <h2>You guessed correctly!</h2>
+            <img id="resultImage" src="" alt="Character" />
+            <p id="resultName"></p>
+            <button id="restartBtn">Play Again</button>
         </div>
     </div>
     <script>
         const characterSets = {
-            yugioh: {
+            yugioh_dm : {
                 attributes: ['image', 'name', 'series', 'age', 'height', 'victories'],
                 characters: [
                     {
@@ -231,38 +345,44 @@
                         victories: 34,
                         image: 'https://uploads1.yugioh.com/character/2/detail/list/yugi-m.png?1371660956'
                     },
+                ]
+            },
+            yugioh_gx: {
+                attributes: ['name','gender', 'height', 'occupation', 'dorm'],
+                characters: [
                     {
                         name: 'Jaden Yuki',
-                        series: 'GX',
-                        age: '15',
-                        height: 165,
-                        victories: 78,
+                        gender: 'Male',
+                        height: 165.7,
+                        occupation: 'Student',
+                        Dorm: 'Slifer Red',
                         image: 'https://uploads2.yugioh.com/character/24/detail/list/jaden-m.png?1371840762'
                     },
                     {
-                        name: 'Yusei Fudo',
-                        series: '5Ds',
-                        age: '18',
-                        height: 175,
-                        victories: 52,
-                        image: 'https://uploads2.yugioh.com/character/31/detail/list/yusei-m.png?1371843969'
-                    }
-                ]
-            },
-            dragonball: {
-                attributes: ['name'],
-                characters: [
-                    { name: 'Goku' },
-                    { name: 'Krillin' }
+                        name: '',
+                        gender: '',
+                        height: 0,
+                        occupation: '',
+                        dorm: '',
+                        image: ''
+                    },
                 ],
             },
-            pokemon: {
+            yugioh_5ds: {
                 attributes: ['name'],
                 characters:
-                    [{ name: 'Ash' },
-                    { name: 'Misty' }]
+                    [
+                        {
+                            name: 'Yusei Fudo',
+                            series: '5Ds',
+                            age: '18',
+                            height: 175,
+                            victories: 52,
+                            image: 'https://uploads2.yugioh.com/character/31/detail/list/yusei-m.png?1371843969'
+                        },
+                    ]
             },
-            digimon: [
+            yugioh_zexal: [
                 { name: 'Matt' },
                 { name: 'Leo' }
             ]
@@ -277,26 +397,47 @@
         const suggestionsBox = document.getElementById('suggestions');
         const gridContainer = document.getElementById('grid');
 
-        document.getElementById('setSelector').addEventListener('change', (e) => {
-            const selectedSet = e.target.value;
+        /*Detect set selection*/
+        document.querySelectorAll('.set-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const selectedSet = card.dataset.set;
+                if (!selectedSet || !characterSets[selectedSet]) return;
 
-            if (!selectedSet || !characterSets[selectedSet]) return;
+                const set = characterSets[selectedSet];
+                characters = set.characters;
+                activeAttributes = set.attributes;
+                mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
 
-            const set = characterSets[selectedSet];
-            characters = set.characters;
-            activeAttributes = set.attributes;
+                guessedCharacters.clear();
+                gameOver = false;
+                searchInput.value = '';
+                searchInput.disabled = false;
+                gridContainer.innerHTML = '';
+
+                renderHeaderRow();
+            });
+        });
+        /*Detect restart*/
+        document.getElementById('restartBtn').addEventListener('click', () => {
+            // Pick a new character from the current set
             mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
 
+            // Reset game state
             guessedCharacters.clear();
             gameOver = false;
             searchInput.value = '';
             searchInput.disabled = false;
+            suggestionsBox.innerHTML = '';
             gridContainer.innerHTML = '';
 
             renderHeaderRow();
+            document.getElementById('resultScreen').style.display = 'none';
         });
 
         function renderHeaderRow() {
+            gridContainer.innerHTML = ''; // Clear previous header
+            gridContainer.style.setProperty('--column-count', activeAttributes.length);
+
             const header = document.createElement('div');
             header.className = 'guess-row labels';
 
@@ -364,11 +505,15 @@
 
             if (char.name === mysteryCharacter.name) {
                 gameOver = true;
-                setTimeout(() => {
-                    if (confirm(`🎉🎉🎉 You guessed ${char.name} correctly! 🎉🎉🎉\n\nPlay again?`)) {
-                        window.location.reload();
-                    }
-                }, 200);
+
+                // Show result screen
+                const resultScreen = document.getElementById('resultScreen');
+                const resultImage = document.getElementById('resultImage');
+                const resultName = document.getElementById('resultName');
+
+                resultImage.src = char.image;
+                resultName.textContent = char.name;
+                resultScreen.style.display = 'flex';
             }
         }
 
