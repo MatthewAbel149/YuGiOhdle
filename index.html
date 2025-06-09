@@ -27,7 +27,7 @@
 
         .game-container {
             width: 100%;
-            max-width: 900px; /* limits the max size on big screens */
+            max-width: 3000px; /* limits the max size on big screens */
             margin: 0 auto; /* center horizontally */
             padding: 20px;
             background: rgba(0, 0, 0, 0.7); /* or your preferred semi-transparent white */
@@ -53,6 +53,8 @@
             border: 1px solid #ccc;
             max-height: 250px;
             overflow-y: auto;
+            overflow-x: hidden;
+            min-width: fit-content;
             margin-bottom: 20px;
             text-align: left;
         }
@@ -125,8 +127,8 @@
         }
 
             .portrait img {
-                width: 50px;
-                height: 75px;
+                width: 100px;
+                height: 100px;
                 border-radius: 0px;
                 object-fit: cover;
             }
@@ -146,15 +148,11 @@
 
         /*Settings for the suggestion boxes*/
         #suggestions {
-            border: 1px solid #ccc;
             max-height: 300px;
             overflow-y: auto;
-            margin-bottom: 20px;
-            padding: 5px;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            overflow-x: auto;
+            display: block;
+            white-space: nowrap;
         }
 
             #suggestions .guess-row {
@@ -165,6 +163,9 @@
                 background-color: #fafafa;
                 cursor: pointer;
                 transition: background 0.2s;
+                min-width: fit-content;
+                flex-shrink: 0;
+                white-space: nowrap;
             }
 
                 #suggestions .guess-row:hover {
@@ -327,23 +328,447 @@
     <script>
         const characterSets = {
             yugioh_dm : {
-                attributes: ['image', 'name', 'series', 'age', 'height', 'victories'],
+                attributes: ['image', 'name', 'gender', 'arc', 'height', 'weight', 'occupation', 'role'],
                 characters: [
                     {
                         name: 'Yami Yugi',
-                        series: 'Duel Monsters',
-                        age: '1000+',
-                        height: 153,
-                        victories: 34,
-                        image: 'https://uploads1.yugioh.com/character/3/detail/list/yamiyugi-m.png?1371661244'
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '153',
+                        weight: '42',
+                        occupation: 'Spirit',
+                        role: 'Protagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/a6/YamiYugiMD.png/revision/latest?cb=20190602124558'
                     },
                     {
                         name: 'Yugi Muto',
-                        series: 'Duel Monsters',
-                        age: '16',
-                        height: 153,
-                        victories: 34,
-                        image: 'https://uploads1.yugioh.com/character/2/detail/list/yugi-m.png?1371660956'
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '153',
+                        weight: '42',
+                        occupation: 'Student',
+                        role: 'Protagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d1/YugiMuto-DULI.png/revision/latest?cb=20180331132907'
+                    },
+                    {
+                        name: 'Seto Kaiba',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '186',
+                        weight: '65',
+                        occupation: 'Businessman',
+                        role: 'Anti-Hero',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/23/SetoKaiba-DL.png/revision/latest?cb=20190614200609'
+                    },
+                    {
+                        name: 'Maximillion Pegasus',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '188',
+                        weight: '65',
+                        occupation: 'Businessman',
+                        role: 'Primary Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/a7/MaximillionPegasusMD.png/revision/latest/scale-to-width-down/1000?cb=20190602123323'
+                    },
+                    {
+                        name: 'Joey Wheeler',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '178',
+                        weight: '62',
+                        occupation: 'Student',
+                        role: 'Protagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/1/1f/JoeyWheeler-DULI.png/revision/latest?cb=20211007115529'
+                    },
+                    {
+                        name: 'Yami Bakura',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '176',
+                        weight: '52',
+                        occupation: 'Spirit', 
+                        role: 'Primary Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/a/ae/YamiBakura-DULI.png/revision/latest?cb=20170515095008'
+                    },
+                    {
+                        name: 'Bakura Ryou',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '176',
+                        weight: '52',
+                        occupation: 'Student',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/e/ef/Ryo2.png/revision/latest?cb=20150425031740'
+                    },
+                    {
+                        name: 'Solomon Muto',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '151',
+                        weight: '62',
+                        occupation: 'Businessman',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/3c/SolomonMutoMD.png/revision/latest?cb=20190602122922'
+                    },
+                    {
+                        name: 'Mokuba Kaiba',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '142',
+                        weight: '28',
+                        occupation: 'Businessman',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/99/MokubaKaiba-DULI.png/revision/latest?cb=20171001200858'
+                    },
+                    {
+                        name: 'Mai Valentine',
+                        gender: 'Female',
+                        arc: 'Duelist Kingdom',
+                        height: '175',
+                        weight: '52',
+                        occupation: 'Pro Duelist, Minion',
+                        role: 'Anti-Villain',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/dd/MaiValentineMD.png/revision/latest?cb=20190602124359'
+                    },
+                    {
+                        name: 'Weevil Underwood',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '162',
+                        weight: '51',
+                        occupation: 'Pro Duelist, Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/0a/WeevilUnderwood-DULI.png/revision/latest?cb=20180331133014'
+                    },
+                    {
+                        name: 'Rex Raptor',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '165',
+                        weight: '52',
+                        occupation: 'Pro Duelist, Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/3e/RexRaptor-DULI.png/revision/latest?cb=20180706092723'
+                    },
+                    {
+                        name: 'Dartz',
+                        gender: 'Male',
+                        arc: 'Waking the Dragons',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Businessman',
+                        role: 'Primary Antagonist',
+                        image: 'https://ms.yugipedia.com//thumb/2/2e/Dartz-LOD.png/800px-Dartz-LOD.png'
+                    },
+                    {
+                        name: 'Tristan Taylor',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '180',
+                        weight: '65',
+                        occupation: 'Student',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6b/Tristan-TFSP.png/revision/latest?cb=20150622142834'
+                    },
+                    {
+                        name: 'Mako Tsunami',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: '178',
+                        weight: '68',
+                        occupation: 'Pro Duelist',
+                        role: 'Anti-villain',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d2/MakoTsunamiMD.png/revision/latest?cb=20190602123708'
+                    },
+                    {
+                        name: 'Shadi',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Spirit',
+                        role: 'Other',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/cb/ShadiMD.png/revision/latest?cb=20190602124052'
+                    },
+                    {
+                        name: 'Leon von Schroeder',
+                        gender: 'Male',
+                        arc: 'Grand Championship',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Businessman',
+                        role: 'Anti-Villain',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/76/LeonWilson.png/revision/latest?cb=20160722123954'
+                    },
+                    {
+                        name: 'Ziegfried von Schroeder',
+                        gender: 'Male',
+                        arc: 'Grand Championship',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Businessman',
+                        role: 'Primary Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/ce/Schroederzigfried.png/revision/latest/scale-to-width-down/1000?cb=20160722123527'
+                    },
+                    {
+                        name: 'Espa Roba',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: '172',
+                        weight: '48',
+                        occupation: 'None',
+                        role: 'Anti-Villain',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/c8/EspaRoba-DULI.png/revision/latest/scale-to-width-down/1000?cb=20171121164121'
+                    },
+                    {
+                        name: 'PaniK',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Pro Duelist, Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/9e/PaniK.png/revision/latest?cb=20131125144703'
+                    },
+                    {
+                        name: 'Rafael',
+                        gender: 'Male',
+                        arc: 'Waking the Dragons',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Anti-Villain',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/c/cb/Rafael.png/revision/latest/scale-to-width-down/1000?cb=20190525154546'
+                    },
+                    {
+                        name: 'Odion',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: '183',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Anti-Villain',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6d/Odion-TFSP.png/revision/latest?cb=20150622192137'
+                    },
+                    {
+                        name: 'Bandit Keith',
+                        gender: 'Male',
+                        arc: 'Duelist Kingsom',
+                        height: '190',
+                        weight: '85',
+                        occupation: 'Pro Duelist, Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/4/40/BanditKeithMD.png/revision/latest?cb=20190602123207'
+                    },
+                    {
+                        name: 'Noah Kaiba',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'None',
+                        role: 'Primary Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/78/Noahvillainswiki.png/revision/latest?cb=20171231144007'
+                    },
+                    {
+                        name: 'Gozaburo Kaiba',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Businessman',
+                        role: 'Primary Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/d/d7/Gozaburo11.png/revision/latest?cb=20130927134501'
+                    },
+                    {
+                        name: 'Marik Ishtar',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: '180',
+                        weight: '55',
+                        occupation: 'None',
+                        role: 'Primary Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/37/MarikIshtar-DULI.png/revision/latest?cb=20180106234644'
+                    },
+                    {
+                        name: 'Yami Marik',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: '180',
+                        weight: '55',
+                        occupation: 'Spirit',
+                        role: 'Primary Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/f7/YamiMarik-DULI.png/revision/latest?cb=20170728075955'
+                    },
+                    {
+                        name: 'Ishizu Ishtar',
+                        gender: 'Female',
+                        arc: 'Battle City',
+                        height: '167',
+                        weight: '43',
+                        occupation: 'Businessman',
+                        role: 'Protagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/2b/IshizuIshtarMD.png/revision/latest?cb=20190602124008'
+                    },
+                    {
+                        name: 'Rebecca Hawkins',
+                        gender: 'Female',
+                        arc: 'Battle City',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'None',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/2/2f/RebeccaHawkinsMD.png/revision/latest?cb=20190602121454'
+                    },
+                    {
+                        name: 'Arthur Hawkins',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Businessman',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/9/9d/Arthur-Hawkins1.jpg/revision/latest?cb=20230810181600'
+                    },
+                    {
+                        name: 'Tea Gardner',
+                        gender: 'Female',
+                        arc: 'Duelist Kingdom',
+                        height: '165',
+                        weight: '47',
+                        occupation: 'Student',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/e/e3/T%C3%A9aGardner-DULI.png/revision/latest?cb=20180331132758'
+                    },
+                    {
+                        name: 'Duke Devlin',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: '179',
+                        weight: '64',
+                        occupation: 'Businessman',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/00/Duke-TFSP.png/revision/latest?cb=20150622144236'
+                    },
+                    {
+                        name: 'Valon',
+                        gender: 'Male',
+                        arc: 'Waking the Dragons',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Anti-Hero',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6d/Valon.png/revision/latest?cb=20190531105548'
+                    },
+                    {
+                        name: 'Serenity Wheeler',
+                        gender: 'Female',
+                        arc: 'Duelist Kingdom',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'None',
+                        role: 'Family/Friend',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/8/8b/Serenity.png/revision/latest?cb=20170307114636'
+                    },
+                    {
+                        name: 'Alister',
+                        gender: 'Male',
+                        arc: 'Waking the Dragons',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/5/5a/Alister.png/revision/latest?cb=20190531112647'
+                    },
+                    {
+                        name: 'Vivian Wong',
+                        gender: 'Female',
+                        arc: 'Grand Tournament',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Pro Duelist',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/5/57/VivianWong.png/revision/latest/scale-to-width-down/1000?cb=20160722123836'
+                    },
+                    {
+                        name: 'Umbra',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/7/7c/Umbra3.png/revision/latest?cb=20131202163919'
+                    },
+                    {
+                        name: 'Lumis',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/6/6f/Lumis3.png/revision/latest/scale-to-width-down/1000?cb=20150408015623'
+                    },
+                    {
+                        name: 'Arkana',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Businessman, Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/00/Arkana-DULI.png/revision/latest?cb=20170720113617'
+                    },
+                    {
+                        name: 'Bonz',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/fe/Bonz-LOD.png/revision/latest?cb=20210203003405'
+                    },
+                    {
+                        name: 'Strings',
+                        gender: 'Male',
+                        arc: 'Battle City',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/f/f0/Strings-DULI.png/revision/latest?cb=20171228102429'
+                    },
+                    {
+                        name: 'Gurimo',
+                        gender: 'Male',
+                        arc: 'Waking the Dragons',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/3/33/Gurimo3.png/revision/latest?cb=20131203150054'
+                    },
+                    {
+                        name: 'Para',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Pro Duelist, Minion',
+                        role: 'Antagonist',
+                        image: 'https://static.wikia.nocookie.net/yugioh/images/0/02/Para-TFSP.png/revision/latest?cb=20150622192652'
+                    },
+                    {
+                        name: 'Dox',
+                        gender: 'Male',
+                        arc: 'Duelist Kingdom',
+                        height: 'Unknown',
+                        weight: 'Unknown',
+                        occupation: 'Pro Duelist, Minion',
+                        role: 'Antagonist',
+                        image: ''
                     },
                 ]
             },
@@ -442,6 +867,7 @@
             header.className = 'guess-row labels';
 
             activeAttributes.forEach(attr => {
+
                 const box = document.createElement('div');
                 box.className = 'box header';
                 box.textContent = attr === 'image' ? '' : attr.charAt(0).toUpperCase() + attr.slice(1);
