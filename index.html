@@ -526,6 +526,7 @@
         function loadSet(setKey) {
             const set = characterSets[setKey];
             if (!set) return;
+
             const arcMap = set.arcMap || [];
 
             function getArcForEpisode(episode) {
