@@ -334,10 +334,23 @@
 
 
         document.getElementById('hintBtn').addEventListener('click', () => {
-            if (!mysteryCharacter || !mysteryCharacter.hint1) return;
+            const hintEl = document.getElementById('hintText');
 
-            let hint = mysteryCharacter.hint1;
-            document.getElementById('hintText').textContent = `Hint: ${hint}`;
+            if (!mysteryCharacter) return;
+
+            // Gather all hint fields (hint1, hint2, hint3, etc.)
+            const hints = Object.keys(mysteryCharacter)
+                .filter(key => key.toLowerCase().startsWith('hint') && mysteryCharacter[key])
+                .map(key => mysteryCharacter[key]);
+
+            if (hints.length === 0) {
+                hintEl.textContent = 'No hints available.';
+                return;
+            }
+
+            // Pick a random hint
+            const randomHint = hints[Math.floor(Math.random() * hints.length)];
+            hintEl.textContent = `Hint: ${randomHint}`;
         });
         //Detect set selection
         function renderSetSelector(data) {
