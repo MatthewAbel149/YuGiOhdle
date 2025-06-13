@@ -2,6 +2,53 @@
   "DM": {
     "label": "Duel Monsters",
     "thumbnail": "images/assets/Yugioh.avif",
+    "arcMap": [
+      {
+        "arc": "Duelist Kingdom",
+        "start": 1,
+        "end": 40
+      },
+      {
+        "arc": "Domino City Battles",
+        "start": 41,
+        "end": 49
+      },
+      {
+        "arc": "Battle City (part 1)",
+        "start": 50,
+        "end": 97
+      },
+      {
+        "arc": "Virtual World",
+        "start": 98,
+        "end": 121
+      },
+      {
+        "arc": "Battle City (part 2)",
+        "start": 122,
+        "end": 144
+      },
+      {
+        "arc": "Waking the Dragons",
+        "start": 145,
+        "end": 184
+      },
+      {
+        "arc": "Grand Championship",
+        "start": 185,
+        "end": 198,
+        {
+          "arc": "Pharaoh's Memories'",
+          "start": 199,
+          "end": 219
+        },
+        {
+          "arc": "Ceremonial Battle",
+          "start": 220,
+          "end": 224
+        }
+      }
+    ],
     "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "height", "weight", "occupation", "role" ],
     "characters": [
       {
@@ -553,20 +600,33 @@
     ]
   },
   "GX": {
-    "attributes": [ "name", "gender", "height", "occupation", "dorm" ],
+    "label": "GX",
+    "thumbnail": "",
+    "arcMap": [
+      {
+        "arc": "Seven Stars",
+        "start": 1,
+        "end": 2
+      }
+    ],
+    "attributes": [ "name", "gender", "episode", "arc" "height", "occupation", "dorm" ],
     "characters": [
       {
         "name": "Jaden Yuki",
         "gender": "Male",
-        "height": 165.7,
+        "episode": "1",
+        "arc":  "Seven Stars",
+        "height": "165.7",
         "occupation": "Student",
-        "Dorm": "Slifer Red",
-        "image": "https://uploads2.yugioh.com/character/24/detail/list/jaden-m.png?1371840762"
+        "dorm": "Slifer Red",
+        "image": ""
       },
       {
         "name": "",
         "gender": "",
-        "height": 0,
+        "episode": "",
+        "arc": "",
+        "height": "",
         "occupation": "",
         "dorm": "",
         "image": ""
@@ -574,15 +634,17 @@
     ]
   },
   "5Ds": {
+    "label": "5Ds",
+    "thumbnail": "",
     "attributes": [ "name" ],
     "characters": [
       {
         "name": "Yusei Fudo",
         "series": "5Ds",
         "age": "18",
-        "height": 175,
-        "victories": 52,
-        "image": "https://uploads2.yugioh.com/character/31/detail/list/yusei-m.png?1371843969"
+        "height": "175",
+        "victories": "52",
+        "image": ""
       }
     ]
   }
