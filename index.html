@@ -335,21 +335,21 @@
         document.getElementById('hintBtn').addEventListener('click', () => {
             const hintEl = document.getElementById('hintText');
 
-            if (!mysteryCharacter) return;
+            if (!mysteryCharacter || !Array.isArray(mysteryCharacter.hints)) {
+                hintEl.textContent = 'No hints available.';
+                return;
+            }
 
-            // Gather all hint fields (hint1, hint2, hint3, etc.)
-            const hints = Object.keys(mysteryCharacter)
-                .filter(key => key.toLowerCase().startsWith('hint') && mysteryCharacter[key])
-                .map(key => mysteryCharacter[key]);
+            const hints = mysteryCharacter.hints;
 
             if (hints.length === 0) {
                 hintEl.textContent = 'No hints available.';
                 return;
             }
 
-            // Pick a random hint
+            // Select a single random hint
             const randomHint = hints[Math.floor(Math.random() * hints.length)];
-            hintEl.textContent = `Recognizable Card: ${randomHint}`;
+            hintEl.textContent = `Recognizable card: ${randomHint}`;
         });
         //Detect set selection
         function renderSetSelector(data) {
