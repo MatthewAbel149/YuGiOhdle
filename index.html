@@ -30,7 +30,7 @@
             max-width: 3000px; /* limits the max size on big screens */
             margin: 0 auto; /* center horizontally */
             padding: 20px;
-            background: rgba(0, 0, 0, 0.7); /* or your preferred semi-transparent white */
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 12px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
             box-sizing: border-box;
@@ -97,6 +97,12 @@
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
         }
+        .guess-row.labels .box,
+        .guess-row.labels .header {
+            background-color: transparent !important;
+            box-shadow: none !important;
+            border: none;
+        }
         .guess-row {
             display: grid;
             grid-template-columns: repeat(var(--column-count), 1fr);
@@ -106,7 +112,7 @@
 
         .box.header {
             background-color: #ddd;
-            color: rgba(1,1,1,0);
+            color: rgba(1,1,1,1);
             font-weight: bold;
         }
 
