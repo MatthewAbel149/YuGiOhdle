@@ -196,17 +196,16 @@
         }
 
         .set-selector {
-            width: 180px;
+            width: 100%;
             background: #222;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            z-index: 1000;
+            padding: 20px 10px;
             display: flex;
             justify-content: center;
+            flex-wrap: wrap;
             gap: 15px;
             border-top: 2px solid #444;
+            box-sizing: border-box;
+            margin-top: 40px;
         }
 
         .game-panel {
@@ -312,9 +311,10 @@
                 <p id="resultName"></p>
                 <button id="restartBtn">Play Again</button>
             </div>
+            <h2 style="text-align:center; color:white;">Choose a Character Set</h2>
+            <footer class="set-selector" id="setSelector"></footer>
         </div>
     </div>
-    <footer class="set-selector" id="setSelector"></footer>
 
     <script>
         let characterSets = {};
@@ -350,7 +350,7 @@
 
             // Pick a random hint
             const randomHint = hints[Math.floor(Math.random() * hints.length)];
-            hintEl.textContent = `Hint: ${randomHint}`;
+            hintEl.textContent = `Recognizable Card: ${randomHint}`;
         });
         //Detect set selection
         function renderSetSelector(data) {
