@@ -1,5 +1,7 @@
 {
   "DM": {
+    "label": "Duel Monsters",
+    "thumbnail": "images/assets/Yugioh.avif",
     "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "height", "weight", "occupation", "role" ],
     "characters": [
       {

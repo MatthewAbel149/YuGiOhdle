@@ -277,25 +277,8 @@
 <body>
 
     <div class="container">
-        <div class="set-selector">
-            <div class="set-card" data-set="yugioh_dm">
-                <img src="https://static0.gamerantimages.com/wordpress/wp-content/uploads/2022/07/Yugioh.jpg" alt="Yu-Gi-Oh!" />
-                <span>Duel Monsters</span>
-            </div>
-            <div class="set-card" data-set="yugioh_gx">
-                <img src="https://static.wikia.nocookie.net/dubbing9585/images/a/a1/Yugiohgx.jpg/revision/latest?cb=20190322043418" alt="Yu-Gi-Oh! GX" />
-                <span>GX</span>
-            </div>
-            <div class="set-card" data-set="yugioh_5ds">
-                <img src="https://m.media-amazon.com/images/S/pv-target-images/48ef0c5fb7d27d266a1cba503bebb1a96618b811339c6621965467b45979e241.jpg" alt="Yu-Gi-Oh! 5Ds" />
-                <span>5Ds</span>
-            </div>
-            <div class="set-card" data-set="yugioh_zexal">
-                <img src="https://de7i3bh7bgh0d.cloudfront.net/2016/11/02/20/55/04/30de93b6-e6a9-416e-86b9-387b63239f27/YuGiOhZexal.jpg" alt="Yu-Gi-Oh! Zexal" />
-                <span>Zexal</span>
-            </div>
-        </div>
-
+        <aside class="set-selector" id="setSelector">
+        </aside>
     </div>
 
     <div class="game-panel">
@@ -331,25 +314,15 @@
     </div>
     <script>
         let characterSets = {};
-        //Fetch Character Sets
-        fetch('CharacterSets.json')
-            .then(res => res.json())
-            .then(data => {
-                characterSets = data;
-                // Load the default set
-                const defaultSet = 'DM';
-                const setCard = document.querySelector(`.set-card[data-set="${defaultSet}"]`);
-                if (setCard) setCard.click();
-            })
-            .catch(err => {
-                console.error('Failed to load character sets:', err);
-            });
-
         let characters = [];
         let mysteryCharacter = null;
         let activeAttributes = [];
         const guessedCharacters = new Set();
         let gameOver = false;
+        let hintIndex = 0;
+
+        //Fetch Character Sets
+
 
         const searchInput = document.getElementById('searchInput');
         const suggestionsBox = document.getElementById('suggestions');
@@ -362,26 +335,24 @@
             let hint = mysteryCharacter.hint1;
             document.getElementById('hintText').textContent = `Hint: ${hint}`;
         });
-        /*Detect set selection*/
-        document.querySelectorAll('.set-card').forEach(card => {
-            card.addEventListener('click', () => {
-                const selectedSet = card.dataset.set;
-                if (!selectedSet || !characterSets[selectedSet]) return;
+        //Detect set selection
+        function renderSetSelector(data) {
+            const selector = document.getElementById('setSelector');
+            selector.innerHTML = '';
 
-                const set = characterSets[selectedSet];
-                characters = set.characters;
-                activeAttributes = set.attributes;
-                mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
+            Object.entries(data).forEach(([key, set]) => {
+                const card = document.createElement('div');
+                card.className = 'set-card';
+                card.dataset.set = key;
+                card.innerHTML = `
+            <img src="${set.thumbnail}" alt="${set.label}" />
+            <span>${set.label}</span>
+        `;
 
-                guessedCharacters.clear();
-                gameOver = false;
-                searchInput.value = '';
-                searchInput.disabled = false;
-                gridContainer.innerHTML = '';
-
-                renderHeaderRow();
+                card.addEventListener('click', () => loadSet(key));
+                selector.appendChild(card);
             });
-        });
+        }
         /*Detect restart*/
         document.getElementById('restartBtn').addEventListener('click', () => {
             // Pick a new character from the current set
@@ -536,6 +507,27 @@
             showSuggestions(e.target.value);
         });
 
+        function loadSet(setKey) {
+            const set = characterSets[setKey];
+            if (!set) return;
+
+            characters = set.characters;
+            activeAttributes = set.attributes;
+            mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
+            guessedCharacters.clear();
+            gameOver = false;
+            hintIndex = 0;
+
+            searchInput.value = '';
+            searchInput.disabled = false;
+            gridContainer.innerHTML = '';
+            suggestionsBox.innerHTML = '';
+            document.getElementById('hintText').textContent = '';
+            document.getElementById('resultScreen').style.display = 'none';
+
+            renderHeaderRow();
+        }
+
         document.addEventListener('click', e => {
             if (!suggestionsBox.contains(e.target) && e.target !== searchInput) {
                 suggestionsBox.style.display = 'none';
@@ -543,9 +535,14 @@
         });
         /* Default to loading DM */
         window.addEventListener('DOMContentLoaded', () => {
-            const defaultSet = 'yugioh_dm'; // key from characterSets
-            const setCard = document.querySelector(`.set-card[data-set="${defaultSet}"]`);
-            if (setCard) setCard.click();
+            fetch('CharacterSet.json')
+                .then(res => res.json())
+                .then(data => {
+                    characterSets = data;
+                    renderSetSelector(data);
+                    loadSet('DM'); // Default set on page load
+                })
+                .catch(err => console.error('Failed to load character sets:', err));
         });
     </script>
 
