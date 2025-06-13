@@ -540,12 +540,12 @@
 
             // Dynamically assign arc if missing
             characters = set.characters.map(char => {
-                if ('episode' in char && !char.arc) {
+                if ('episode' in char) {
                     return { ...char, arc: getArcForEpisode(Number(char.episode)) };
                 }
                 return char;
             });
-            activeAttributes = set.attributes;
+            activeAttributes = set.attributes || [];
             mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
             guessedCharacters.clear();
             gameOver = false;

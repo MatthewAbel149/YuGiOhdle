@@ -54,6 +54,7 @@
       {
         "name": "Yami Yugi",
         "gender": "Male",
+        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Black",
         "height": "153",
@@ -66,6 +67,7 @@
       {
         "name": "Yugi Muto",
         "gender": "Male",
+        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Black",
         "height": "153",
@@ -78,6 +80,7 @@
       {
         "name": "Seto Kaiba",
         "gender": "Male",
+        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Brown",
         "height": "186",
@@ -90,6 +93,7 @@
       {
         "name": "Maximillion Pegasus",
         "gender": "Male",
+        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Gray",
         "height": "188",
@@ -102,6 +106,7 @@
       {
         "name": "Joey Wheeler",
         "gender": "Male",
+        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Blonde",
         "height": "178",
@@ -114,6 +119,7 @@
       {
         "name": "Yami Bakura",
         "gender": "Male",
+        "arc": "Duelist Kingdom",
         "episode": "12",
         "hair": "White",
         "height": "176",
@@ -126,6 +132,7 @@
       {
         "name": "Bakura Ryou",
         "gender": "Male",
+        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "White",
         "height": "176",
@@ -138,6 +145,7 @@
       {
         "name": "Solomon Muto",
         "gender": "Male",
+        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Gray",
         "height": "151",
@@ -280,6 +288,7 @@
       {
         "name": "Espa Roba",
         "gender": "Male",
+        "arc": "Battle City",
         "episode": "54",
         "hair": "Green",
         "height": "172",
@@ -357,6 +366,7 @@
       {
         "name": "Gozaburo Kaiba",
         "gender": "Male",
+        "arc": "Battle City",
         "episode": "97",
         "hair": "Gray",
         "height": "Not confirmed",
