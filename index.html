@@ -101,13 +101,14 @@
 
         .box.header {
             background-color: #ddd;
-            color: rgba(1,1,1,0);
+            color: rgba(1,1,1,1);
             font-weight: bold;
         }
 
         .box,
         .header {
             display: flex;
+            color: rgba(1,1,1,0);
             align-items: center; /* vertical center */
             justify-content: center; /* horizontal center */
             text-align: center;
@@ -539,11 +540,10 @@
             // Dynamically assign arc if missing
             characters = set.characters.map(char => {
                 if ('episode' in char && !char.arc) {
-                    return { ...char, arc: getArcForEpisode(char.episode) };
+                    return { ...char, arc: getArcForEpisode(Number(char.episode)) };
                 }
                 return char;
             });
-            characters = set.characters;
             activeAttributes = set.attributes;
             mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
             guessedCharacters.clear();
