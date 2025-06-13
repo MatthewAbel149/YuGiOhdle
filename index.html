@@ -94,16 +94,15 @@
         /*Settings for player's previous guess display*/
         .guess-row {
             display: grid;
-            grid-template-columns: auto repeat(var(--text-column-count), minmax(80px, 1fr));
-            gap: 8px;
-            overflow-x: auto;
+            grid-template-columns: repeat(var(--column-count), 1fr);
+            gap: 10px;
+            width: 100%;
         }
 
-        .box, .header {
-            font-size: 14px;
-            padding: 8px;
-            text-align: center;
-            word-wrap: break-word;
+        .box.header {
+            background-color: #ddd;
+            color: #000;
+            font-weight: bold;
         }
 
         .box,
@@ -191,16 +190,25 @@
         /*Settings for the Selector panel*/
         .container {
             display: flex;
-            height: auto;
-            flex-wrap: wrap;
+            height: 100vh;
             margin-left: 180px;
             overflow: hidden;
         }
 
-        .set-selector {
+        set-selector {
             width: 180px;
-            min-width: 120px;
-            flex-shrink: 0;
+            background: #222;
+            padding: 10px;
+            overflow-y: auto;
+            position: fixed;
+            top: 0;
+            height: 100vh;
+            left: 0;
+            bottom: 0;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
         .game-panel {
@@ -270,35 +278,6 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 6px;
-        }
-        /*Mobile UI*/
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-
-            .set-selector {
-                flex-direction: row;
-                flex-wrap: wrap;
-                overflow-x: auto;
-                width: 100%;
-                justify-content: center;
-                padding: 10px;
-            }
-
-            .set-card {
-                flex: 0 0 auto;
-                width: 100px;
-            }
-
-            .game-container {
-                max-width: 100%;
-                padding: 10px;
-            }
-
-            .guess-row {
-                font-size: 12px;
-            }
         }
 
     </style>
