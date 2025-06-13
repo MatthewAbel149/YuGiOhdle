@@ -66,7 +66,7 @@
         "weight": "62",
         "occupation": "Student",
         "role": "Protagonist",
-        "image": "images/DM/JoeyWheeler-DULI.png",
+        "image": "images/DM/JoeyWheeler.png",
         "hints": [ "Red-Eyes Black Dragon", "Time Wizard", "Flame Swordsman" ]
       },
       {
@@ -391,7 +391,7 @@
         "weight": "Not confirmed",
         "occupation": "Business",
         "role": "Family/Friend",
-        "image": "images/DM/ArhurHawkins.png",
+        "image": "images/DM/ArthurHawkins.png",
         "hints": [ "Blue-Eyes White Dragon", "Millennium Shield", "Giant Soldier of Stone" ]
       },
       {
@@ -404,7 +404,7 @@
         "weight": "47",
         "occupation": "Student",
         "role": "Family/Friend",
-        "image": "images/DM/TeaGardner-DULI.png",
+        "image": "images/DM/TéaGardner-DULI.png",
         "hints": [ "Magician of Faith", "Shining Friendship", "Dark Magician Girl" ]
       },
       {
@@ -482,7 +482,7 @@
         "weight": "Not confirmed",
         "occupation": "Minion",
         "role": "Antagonist",
-        "image": "images/DM/LumisandUmbra-DULI",
+        "image": "images/DM/LumisandUmbra-DULI.png",
         "hints": [ "The Masked Beast", "Mask of Restrict", "Masked Beast Des Gardius" ]
       },
       {
