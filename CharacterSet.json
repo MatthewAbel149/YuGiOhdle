@@ -36,17 +36,17 @@
       {
         "arc": "Grand Championship",
         "start": 185,
-        "end": 198,
-        {
-          "arc": "Pharaoh's Memories'",
-          "start": 199,
-          "end": 219
-        },
-        {
-          "arc": "Ceremonial Battle",
-          "start": 220,
-          "end": 224
-        }
+        "end": 198
+      },
+      {
+        "arc": "Pharaoh's Memories'",
+        "start": 199,
+        "end": 219
+      },
+      {
+        "arc": "Ceremonial Battle",
+        "start": 220,
+        "end": 224
       }
     ],
     "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "height", "weight", "occupation", "role" ],
@@ -609,13 +609,13 @@
         "end": 2
       }
     ],
-    "attributes": [ "name", "gender", "episode", "arc" "height", "occupation", "dorm" ],
+    "attributes": [ "name", "gender", "episode", "arc", "height", "occupation", "dorm" ],
     "characters": [
       {
         "name": "Jaden Yuki",
         "gender": "Male",
         "episode": "1",
-        "arc":  "Seven Stars",
+        "arc": "Seven Stars",
         "height": "165.7",
         "occupation": "Student",
         "dorm": "Slifer Red",
