@@ -103,6 +103,7 @@
             .guess-row.labels .header {
                 background-color: rgba(0.4,0.4,0.4,0);
                 color: white;
+                font-size: 14px;
                 box-shadow: none !important;
                 border: none;
             }
@@ -196,9 +197,9 @@
                 text-align: center;
                 color: white;
                 font-weight: normal;
-                font-size: 12px;
+                font-size: 14px;
                 width: 100px;
-                height: 75px;
+                height: 100px;
                 background: rgba(.3,.3,.3,0.25);
                 border-radius: 4px;
                 white-space: normal;
@@ -396,9 +397,6 @@
         const guessedCharacters = new Set();
         let gameOver = false;
         let hintIndex = 0;
-
-        //Fetch Character Sets
-
 
         const searchInput = document.getElementById('searchInput');
         const suggestionsBox = document.getElementById('suggestions');
