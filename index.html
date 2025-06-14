@@ -5,12 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Yu-Gi-Oh!dle</title>
     <style>
+        @font-face {
+            font-family: 'MatrixBook';
+            src: url('fonts/Yu-Gi-Oh! Matrix Book.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         * {
             box-sizing: border-box;
         }
 
         html, body {
-            font-family: sans-serif;
+            font-family: "MatrixBook", sans-serif;
             margin: 0;
             height: 100vh;
             display: flex;
@@ -98,7 +104,7 @@
             color: green;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
         }
-
+        /*Font settings for guess row text*/
             .guess-row.labels .box,
             .guess-row.labels .header {
                 background-color: rgba(0.4,0.4,0.4,0);
@@ -120,6 +126,7 @@
             background-color: #ddd;
             color: blue;
             font-weight: bold;
+            height: 50px;
         }
 
         .box,
@@ -331,8 +338,9 @@
             }
 
         .box, .header {
+            /*font-family:*/
             width: 100px;
-            height: 100px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
