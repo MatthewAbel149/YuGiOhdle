@@ -54,7 +54,6 @@
       {
         "name": "Yami Yugi",
         "gender": "Male",
-        "arc": "",
         "episode": "1",
         "hair": "Black",
         "height": "153",
@@ -79,7 +78,6 @@
       {
         "name": "Seto Kaiba",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Brown",
         "height": "186",
@@ -92,7 +90,6 @@
       {
         "name": "Maximillion Pegasus",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Gray",
         "height": "188",
@@ -105,7 +102,6 @@
       {
         "name": "Joey Wheeler",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Blonde",
         "height": "178",
@@ -118,7 +114,6 @@
       {
         "name": "Yami Bakura",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "12",
         "hair": "White",
         "height": "176",
@@ -131,7 +126,6 @@
       {
         "name": "Bakura Ryou",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "White",
         "height": "176",
@@ -144,7 +138,6 @@
       {
         "name": "Solomon Muto",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Gray",
         "height": "151",
@@ -157,7 +150,6 @@
       {
         "name": "Mokuba Kaiba",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Black",
         "height": "142",
@@ -170,7 +162,6 @@
       {
         "name": "Mai Valentine",
         "gender": "Female",
-        "arc": "Duelist Kingdom",
         "episode": "3",
         "hair": "Blonde",
         "height": "175",
@@ -183,7 +174,6 @@
       {
         "name": "Weevil Underwood",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "2",
         "hair": "Green",
         "height": "162",
@@ -196,7 +186,6 @@
       {
         "name": "Rex Raptor",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "2",
         "hair": "Brown",
         "height": "165",
@@ -209,7 +198,6 @@
       {
         "name": "Dartz",
         "gender": "Male",
-        "arc": "Waking the Dragons",
         "episode": "145",
         "hair": "Blue",
         "height": "Not confirmed",
@@ -222,7 +210,6 @@
       {
         "name": "Tristan Taylor",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Brown",
         "height": "180",
@@ -235,7 +222,6 @@
       {
         "name": "Mako Tsunami",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "7",
         "hair": "Black",
         "height": "178",
@@ -248,7 +234,6 @@
       {
         "name": "Shadi",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "40",
         "hair": "Unknown",
         "height": "Not confirmed",
@@ -261,7 +246,6 @@
       {
         "name": "Leon von Schroeder",
         "gender": "Male",
-        "arc": "Grand Championship",
         "episode": "185",
         "hair": "Red",
         "height": "Not confirmed",
@@ -274,7 +258,6 @@
       {
         "name": "Ziegfried von Schroeder",
         "gender": "Male",
-        "arc": "Grand Championship",
         "episode": "185",
         "hair": "Pink, Red",
         "height": "Not confirmed",
@@ -287,7 +270,6 @@
       {
         "name": "Espa Roba",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "54",
         "hair": "Green",
         "height": "172",
@@ -300,7 +282,6 @@
       {
         "name": "PaniK",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "13",
         "hair": "Blue",
         "height": "Not confirmed",
@@ -313,7 +294,6 @@
       {
         "name": "Rafael",
         "gender": "Male",
-        "arc": "Waking the Dragons",
         "episode": "145",
         "hair": "Blonde",
         "height": "Not confirmed",
@@ -326,7 +306,6 @@
       {
         "name": "Odion",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "60",
         "hair": "Bald, Black",
         "height": "183",
@@ -339,7 +318,6 @@
       {
         "name": "Bandit Keith",
         "gender": "Male",
-        "arc": "Duelist Kingsom",
         "episode": "16",
         "hair": "Blonde",
         "height": "190",
@@ -352,7 +330,6 @@
       {
         "name": "Noah Kaiba",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "98",
         "hair": "Blue",
         "height": "Not confirmed",
@@ -365,7 +342,6 @@
       {
         "name": "Gozaburo Kaiba",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "97",
         "hair": "Gray",
         "height": "Not confirmed",
@@ -378,7 +354,6 @@
       {
         "name": "Marik Ishtar",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "50",
         "hair": "White",
         "height": "180",
@@ -391,7 +366,6 @@
       {
         "name": "Yami Marik",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "89",
         "hair": "White",
         "height": "180",
@@ -404,7 +378,6 @@
       {
         "name": "Ishizu Ishtar",
         "gender": "Female",
-        "arc": "Battle City",
         "episode": "52",
         "hair": "Black",
         "height": "167",
@@ -417,7 +390,6 @@
       {
         "name": "Rebecca Hawkins",
         "gender": "Female",
-        "arc": "Battle City",
         "episode": "41",
         "hair": "Blonde",
         "height": "Not confirmed",
@@ -430,7 +402,6 @@
       {
         "name": "Arthur Hawkins",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "41",
         "hair": "Gray",
         "height": "Not confirmed",
@@ -443,7 +414,6 @@
       {
         "name": "Tea Gardner",
         "gender": "Female",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Brown",
         "height": "165",
@@ -456,7 +426,6 @@
       {
         "name": "Duke Devlin",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "46",
         "hair": "Black",
         "height": "179",
@@ -469,7 +438,6 @@
       {
         "name": "Valon",
         "gender": "Male",
-        "arc": "Waking the Dragons",
         "episode": "145",
         "hair": "Brown",
         "height": "Not confirmed",
@@ -482,7 +450,6 @@
       {
         "name": "Serenity Wheeler",
         "gender": "Female",
-        "arc": "Duelist Kingdom",
         "episode": "3",
         "hair": "Brown",
         "height": "Not confirmed",
@@ -495,7 +462,6 @@
       {
         "name": "Alister",
         "gender": "Male",
-        "arc": "Waking the Dragons",
         "episode": "145",
         "hair": "Red",
         "height": "Not confirmed",
@@ -508,7 +474,6 @@
       {
         "name": "Vivian Wong",
         "gender": "Female",
-        "arc": "Grand Tournament",
         "episode": "186",
         "hair": "Black",
         "height": "Not confirmed",
@@ -521,7 +486,6 @@
       {
         "name": "Lumis and Umbra",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "70",
         "hair": "Blue, Bald",
         "height": "Not confirmed",
@@ -534,7 +498,6 @@
       {
         "name": "Arkana",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "60",
         "hair": "Black",
         "height": "Not confirmed",
@@ -547,7 +510,6 @@
       {
         "name": "Bonz",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "29",
         "hair": "Blue",
         "height": "Not confirmed",
@@ -560,7 +522,6 @@
       {
         "name": "Strings",
         "gender": "Male",
-        "arc": "Battle City",
         "episode": "65",
         "hair": "Bald",
         "height": "Not confirmed",
@@ -573,7 +534,6 @@
       {
         "name": "Gurimo",
         "gender": "Male",
-        "arc": "Waking the Dragons",
         "episode": "145",
         "hair": "Brown",
         "height": "Not confirmed",
@@ -586,7 +546,6 @@
       {
         "name": "Paradox Brothers",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "19",
         "hair": "Bald",
         "height": "Not confirmed",
@@ -599,7 +558,6 @@
       {
         "name": "",
         "gender": "Male",
-        "arc": "",
         "episode": "",
         "hair": "",
         "height": "Not confirmed",
@@ -642,7 +600,6 @@
         "name": "Jaden Yuki",
         "gender": "Male",
         "episode": "1",
-        "arc": "Seven Stars",
         "height": "165.7",
         "occupation": "Student",
         "dorm": "Slifer Red",
@@ -652,7 +609,6 @@
         "name": "",
         "gender": "",
         "episode": "",
-        "arc": "",
         "height": "",
         "occupation": "",
         "dorm": "",

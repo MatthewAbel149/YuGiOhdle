@@ -18,7 +18,7 @@
             align-items: center;
             background: #f5f5f5;
             background-attachment: fixed;
-            background-image: url(../images/assets/CardBG.jpg); /*Background for site*/
+            background-image: url('images/assets/CardBG.jpg'); /*Background for site*/
             /*background-size: cover;*/
             background-position: center;
             /*background-repeat: no-repeat;*/
@@ -29,6 +29,7 @@
             width: 100%;
             max-width: 3000px; /* limits the max size on big screens */
             margin: 0 auto; /* center horizontally */
+            top: 200px;
             padding: 20px;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 12px;
@@ -189,15 +190,19 @@
             background-color: black;
         }
 
-        #suggestions .box {
-            padding: 10px;
-            text-align: center;
-            color: #333;
-            font-weight: normal;
-            height: 100px;
-            background: rgba(0,0,0,0.25);
-            border-radius: 4px;
-        }
+            #suggestions .box {
+                padding: 10px;
+                text-align: center;
+                color: #333;
+                font-weight: normal;
+                height: 75px;
+                background: rgba(0,0,0,0.25);
+                border-radius: 4px;
+
+                white-space: normal;
+                word-break: break-word;
+                overflow-wrap: break-word;
+            }
 
         #suggestions .portrait img {
             max-width: 100px;
@@ -327,9 +332,9 @@
                 <p id="resultName"></p>
                 <button id="restartBtn">Play Again</button>
             </div>
+        </div>
             <h2 style="text-align:center; color:white;">Choose a Character Set</h2>
             <footer class="set-selector" id="setSelector"></footer>
-        </div>
     </div>
 
     <script>
