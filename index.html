@@ -197,6 +197,7 @@
                 text-align: center;
                 color: white;
                 font-weight: normal;
+                width: 100px;
                 height: 75px;
                 background: rgba(.3,.3,.3,0.25);
                 border-radius: 4px;
@@ -270,13 +271,20 @@
             overflow-x: auto;
             max-width: 100%;
         }
+        .scroll-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+        .scroll-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
         .guess-row,
         .suggestion-row {
-            min-width: max-content;
-            width: fit-content;
             display: grid;
             grid-template-columns: auto repeat(var(--text-column-count), minmax(80px, 1fr));
             gap: 10px;
+            width: fit-content;
+            min-width: max-content;
         }
 
         /*Settings for the results screen*/
