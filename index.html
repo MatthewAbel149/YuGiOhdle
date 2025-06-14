@@ -329,9 +329,8 @@
             }
 
         .box, .header {
-            min-width: 100px;
-            min-height: 100px;
-            max-height: 100px;
+            width: 100px;
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -388,7 +387,6 @@
             <footer class="set-selector" id="setSelector"></footer>
         </div>
     </div>
-
     <script>
         let characterSets = {};
         let characters = [];
@@ -518,8 +516,6 @@
 
             const row = document.createElement('div');
             row.className = `guess-row ${className}`.trim();
-            const columnCount = activeAttributes.length;
-            row.style.setProperty('--column-count', columnCount);
             
             activeAttributes.forEach(attr => {
                 const box = document.createElement('div');
@@ -564,7 +560,7 @@
                 row.addEventListener('click', onClick);
             }
 
-            row.style.gridTemplateColumns = `auto repeat(${activeAttributes.length - 1}, 1fr)`;
+            row.style.gridTemplateColumns = `repeat(${activeAttributes.length}, 100px)`;
             return row;
         }
 
@@ -573,7 +569,6 @@
                 isHeader: true,
                 className: 'labels'
             });
-            headerRow.style.setProperty('--column-count', activeAttributes.length);
             gridContainer.appendChild(headerRow);
         }
 
