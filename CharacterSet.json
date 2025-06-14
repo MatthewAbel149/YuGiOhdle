@@ -1,7 +1,7 @@
 {
   "DM": {
     "label": "Duel Monsters",
-    "thumbnail": "images/assets/Yugioh.avif",
+    "thumbnail": "images/assets/DMSplash.jpg",
     "arcMap": [
       {
         "arc": "Duelist Kingdom",
@@ -54,7 +54,7 @@
       {
         "name": "Yami Yugi",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
+        "arc": "",
         "episode": "1",
         "hair": "Black",
         "height": "153",
@@ -67,7 +67,6 @@
       {
         "name": "Yugi Muto",
         "gender": "Male",
-        "arc": "Duelist Kingdom",
         "episode": "1",
         "hair": "Black",
         "height": "153",
@@ -596,17 +595,45 @@
         "role": "Antagonist",
         "image": "images/DM/ParadoxBrothers-DULI.png",
         "hints": [ "Gate Guardian", "Labyrinth Wall", "Wall Shadow" ]
+      },
+      {
+        "name": "",
+        "gender": "Male",
+        "arc": "",
+        "episode": "",
+        "hair": "",
+        "height": "Not confirmed",
+        "weight": "Not confirmed",
+        "occupation": "",
+        "role": "Antagonist",
+        "image": "images/DM/ParadoxBrothers-DULI.png",
+        "hints": [ "", "", "" ]
       }
     ]
   },
   "GX": {
     "label": "GX",
-    "thumbnail": "",
+    "thumbnail": "images/assets/GXSplash.jpg",
     "arcMap": [
       {
         "arc": "Seven Stars",
         "start": 1,
-        "end": 2
+        "end": 52
+      },
+      {
+        "arc": "Society of Light",
+        "start": 53,
+        "end": 104
+      },
+      {
+        "arc": "Dimension World",
+        "start": 105,
+        "end": 156
+      },
+      {
+        "arc": "Darkness",
+        "start": 157,
+        "end": 180
       }
     ],
     "attributes": [ "name", "gender", "episode", "arc", "height", "occupation", "dorm" ],
@@ -635,7 +662,7 @@
   },
   "5Ds": {
     "label": "5Ds",
-    "thumbnail": "",
+    "thumbnail": "images/assets/5DSSplash.jpg",
     "attributes": [ "name" ],
     "characters": [
       {

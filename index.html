@@ -18,7 +18,7 @@
             align-items: center;
             background: #f5f5f5;
             background-attachment: fixed;
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSynlnk_kuBO_U7_UAKNXTAUg3KN95UiQKF7A&s'); /*Background for site*/
+            background-image: url(../images/assets/CardBG.jpg); /*Background for site*/
             /*background-size: cover;*/
             background-position: center;
             /*background-repeat: no-repeat;*/
@@ -141,6 +141,7 @@
             grid-column: span 1;
         }
 
+        /*The portrait image box for the guess rows*/
         .portrait img {
             width: 100px;
             height: 100px;
@@ -154,7 +155,7 @@
 
         .yellow {
             background-color: #fbc02d;
-            color: #000;
+            color: #000; /* Set text color to black for yellow box*/
         }
 
         .red {
@@ -170,40 +171,40 @@
             white-space: nowrap;
         }
 
-            #suggestions .guess-row {
-                display: grid;
-                grid-template-columns: repeat(var(--column-count), 1fr);
-                gap: 5px;
-                align-items: center;
-                background-color: rgba(1,1,1,0.25);
-                cursor: pointer;
-                transition: background 0.2s;
-                min-width: fit-content;
-                height: 100px;
-                flex-shrink: 0;
-                white-space: nowrap;
-            }
+        #suggestions .guess-row {
+            display: grid;
+            grid-template-columns: repeat(var(--column-count), 1fr);
+            gap: 5px;
+            align-items: center;
+            background-color: rgba(1,1,1,0.25);
+            cursor: pointer;
+            transition: background 0.2s;
+            min-width: fit-content;
+            height: 100px;
+            flex-shrink: 0;
+            white-space: nowrap;
+        }
 
-                #suggestions .guess-row:hover {
-                    background-color: black;
-                }
+        #suggestions .guess-row:hover {
+            background-color: black;
+        }
 
-            #suggestions .box {
-                padding: 10px;
-                text-align: center;
-                color: #333;
-                font-weight: normal;
-                height: 100px;
-                background: #fff;
-                border-radius: 4px;
-            }
+        #suggestions .box {
+            padding: 10px;
+            text-align: center;
+            color: #333;
+            font-weight: normal;
+            height: 100px;
+            background: rgba(0,0,0,0.25);
+            border-radius: 4px;
+        }
 
-            #suggestions .portrait img {
-                max-width: 100px;
-                max-height: 100px;
-                object-fit: cover;
-                border-radius: 4px;
-            }
+        #suggestions .portrait img {
+            max-width: 100px;
+            max-height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
         /*Settings for the Selector panel*/
         .container {
             display: flex;
@@ -264,7 +265,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.25);
             color: white;
             display: flex;
             flex-direction: column;
