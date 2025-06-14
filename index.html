@@ -302,6 +302,51 @@
             cursor: pointer;
             border-radius: 6px;
         }
+        /*Refactored row style settings*/
+        .guess-row,
+        .suggestion-row {
+            display: grid;
+            gap: 8px;
+            margin-bottom: 10px;
+            width: fit-content;
+            min-width: max-content;
+            align-items: stretch;
+        }
+
+        .portrait,
+        .portrait-header {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+            .portrait img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+
+        .box, .header {
+            min-width: 80px;
+            min-height: 64px;
+            max-height: 64px;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            white-space: normal;
+            box-sizing: border-box;
+        }
+        .scroll-wrapper {
+            overflow-x: auto;
+            max-width: 100%;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -315,19 +360,23 @@
                 <p id="hintText" style="margin-top: 10px; font-size: 16px; color: white;"></p>
 
                 <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
-                <div id="suggestions" class="dropdown" style="display:none;">
-                    <div class="guess-row preview-entry">
-                        <div class="portrait">
-                            <img src="portrait-url.jpg" alt="Name" />
+                <div class="scroll-wrapper">
+                    <div id="suggestions" class="dropdown" style="display:none;">
+                        <div class="guess-row preview-entry">
+                            <div class="portrait">
+                                <img src="portrait-url.jpg" alt="Name" />
+                            </div>
+                            <div class="box"></div>
                         </div>
-                        <div class="box"></div>
                     </div>
                 </div>
                 <div class="grid-container">
                     <div class="guess-row labels" style="display:none;">
                         <div class="box" style="background:#ddd; color:#000;"></div>
                     </div>
-                    <div id="grid" class="grid-subcontainer"></div>
+                    <div class="scroll-wrapper">
+                        <div id="grid" class="grid-subcontainer"></div>
+                    </div>
                 </div>
             </div>
             <div id="resultScreen" class="result-screen" style="display: none;">
@@ -387,9 +436,9 @@
                 card.className = 'set-card';
                 card.dataset.set = key;
                 card.innerHTML = `
-                        <img src="${set.thumbnail}" alt="${set.label}" />
-                        <span>${set.label}</span>
-                    `;
+                            <img src="${set.thumbnail}" alt="${set.label}" />
+                            <span>${set.label}</span>
+                        `;
 
                 card.addEventListener('click', () => loadSet(key));
                 selector.appendChild(card);
@@ -481,16 +530,13 @@
 
                     if (isHeader) {
                         box.innerHTML = '&nbsp;';
+                        box.style.backgroundColor = 'transparent';
                     } else {
                         const image = document.createElement('img');
                         image.src = char[attr] || '';
                         image.alt = char.name || '';
-                        image.style.width = '100%';
-                        image.style.height = '100%';
-                        image.style.objectFit = 'contain';
                         box.appendChild(image);
                     }
-
                 } else if (isHeader) {
                     // HEADER CELL
                     box.className = 'box header';
@@ -518,6 +564,7 @@
                 row.addEventListener('click', onClick);
             }
 
+            row.style.gridTemplateColumns = `auto repeat(${activeAttributes.length - 1}, 1fr)`;
             return row;
         }
 
