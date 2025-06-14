@@ -413,26 +413,6 @@
             document.getElementById('resultScreen').style.display = 'none';
         });
 
-        function renderHeaderRow() {
-            gridContainer.innerHTML = ''; // Clear previous header
-            gridContainer.style.setProperty('--column-count', activeAttributes.length);
-            suggestions.innerHTML = ''; // Clear previous header
-            suggestions.style.setProperty('--column-count', activeAttributes.length);
-
-            const header = document.createElement('div');
-            header.className = 'guess-row labels';
-            header.style.setProperty('--column-count', activeAttributes.length);
-
-            activeAttributes.forEach(attr => {
-
-                const box = document.createElement('div');
-                box.className = 'box header';
-                box.textContent = attr === 'image' ? '' : attr.charAt(0).toUpperCase() + attr.slice(1);
-                header.appendChild(box);
-            });
-
-            gridContainer.appendChild(header);
-        }
 
         function getAttributeFeedback(guessValue, answerValue) {
             // Numeric comparison
@@ -460,27 +440,6 @@
             };
         }
 
-        function addGuessRow(char) {
-            const row = document.createElement('div');
-            row.className = 'guess-row';
-            row.style.setProperty('--column-count', activeAttributes.length);
-
-            activeAttributes.forEach(attr => {
-                const box = document.createElement('div');
-                const { color, arrow } = getAttributeFeedback(char[attr], mysteryCharacter[attr]);
-                if (attr === 'image') {
-                    box.className = 'portrait';
-                    box.innerHTML = `<img src="${char[attr]}" alt="${char.name}" />`;
-                } else {
-                    box.className = `box ${color}`;
-                    box.textContent = char[attr] + arrow;
-                }
-                row.appendChild(box);
-            });
-
-            gridContainer.insertBefore(row, gridContainer.children[1]);
-        }
-
         function handleGuess(char) {
             if (gameOver) return;
             guessedCharacters.add(char.name);
@@ -501,6 +460,75 @@
             }
         }
 
+        function createCharacterRow(char, options = {}) {
+            const {
+                useFeedback = false,   // for guess rows
+                onClick = null,        // for suggestion rows
+                className = ''         // e.g., 'preview-entry'
+            } = options;
+
+            const row = document.createElement('div');
+            row.className = `guess-row ${className}`.trim();
+            row.style.gridTemplateColumns = `auto repeat(${activeAttributes.length - 1}, 1fr)`;
+
+            activeAttributes.forEach(attr => {
+                const box = document.createElement('div');
+
+                if (attr === 'image') {
+                    box.className = 'portrait';
+                    box.innerHTML = `<img src="${char[attr]}" alt="${char.name}" />`;
+                } else {
+                    let value = char[attr] || '—';
+                    let color = '';
+                    let arrow = '';
+
+                    if (useFeedback) {
+                        const feedback = getAttributeFeedback(value, mysteryCharacter[attr]);
+                        color = feedback.color;
+                        arrow = feedback.arrow;
+                    }
+
+                    box.className = `box${color ? ` ${color}` : ''}`;
+                    box.textContent = value + (arrow || '');
+                }
+
+                row.appendChild(box);
+            });
+
+            if (onClick) {
+                row.style.cursor = 'pointer';
+                row.addEventListener('click', onClick);
+            }
+
+            return row;
+        }
+
+        function renderHeaderRow() {
+            gridContainer.innerHTML = ''; // Clear previous header
+            gridContainer.style.setProperty('--column-count', activeAttributes.length);
+            suggestions.innerHTML = ''; // Clear previous header
+            suggestions.style.setProperty('--column-count', activeAttributes.length);
+
+            const header = document.createElement('div');
+            header.className = 'guess-row labels';
+            header.style.setProperty('--column-count', activeAttributes.length);
+
+            activeAttributes.forEach(attr => {
+
+                const box = document.createElement('div');
+                box.className = 'box header';
+                box.textContent = attr === 'image' ? '' : attr.charAt(0).toUpperCase() + attr.slice(1);
+                header.appendChild(box);
+            });
+
+            gridContainer.appendChild(header);
+        }
+
+        function addGuessRow(char) {
+            const row = createCharacterRow(char, { useFeedback: true });
+            gridContainer.insertBefore(row, gridContainer.children[1]); // insert under header
+        }
+
         function showSuggestions(value) {
             const matches = characters.filter(c =>
                 c.name.toLowerCase().includes(value.toLowerCase()) &&
@@ -512,37 +540,24 @@
                 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
             });
 
-            suggestionsBox.innerHTML = '';
             if (matches.length === 0 || value.trim() === '') {
                 suggestionsBox.style.display = 'none';
                 return;
             }
 
+            suggestionsBox.innerHTML = '';
+
             matches.forEach(char => {
-                const div = document.createElement('div');
-                div.className = 'guess-row preview-entry';
-                div.style.setProperty('--column-count', activeAttributes.length);
-
-                activeAttributes.forEach(attr => {
-                    const box = document.createElement('div');
-                    if (attr === 'image') {
-                        box.className = 'portrait';
-                        box.innerHTML = `<img src="${char[attr]}" alt="${char.name}" />`;
-                    } else {
-                        box.className = 'box';
-                        box.textContent = char[attr] || '—';
+                const row = createCharacterRow(char, {
+                    className: 'preview-entry',
+                    onClick: () => {
+                        searchInput.value = '';
+                        suggestionsBox.style.display = 'none';
+                        handleGuess(char);
                     }
-
-                    div.appendChild(box);
                 });
 
-                div.addEventListener('click', () => {
-                    searchInput.value = '';
-                    suggestionsBox.style.display = 'none';
-                    handleGuess(char);
-                });
-
-                suggestionsBox.appendChild(div);
+                suggestionsBox.appendChild(row);
             });
 
             suggestionsBox.style.display = 'block';
