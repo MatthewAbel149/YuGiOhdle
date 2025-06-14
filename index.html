@@ -29,7 +29,6 @@
             width: 100%;
             max-width: 3000px; /* limits the max size on big screens */
             margin: 0 auto; /* center horizontally */
-            top: 200px;
             padding: 20px;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 12px;
@@ -99,6 +98,7 @@
             color: green;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
         }
+
             .guess-row.labels .box,
             .guess-row.labels .header {
                 background-color: rgba(0.4,0.4,0.4,0);
@@ -106,6 +106,7 @@
                 box-shadow: none !important;
                 border: none;
             }
+
         .guess-row {
             display: grid;
             color: white;
@@ -143,13 +144,13 @@
             grid-column: span 1;
         }
 
-        /*The portrait image box for the guess rows*/
-        .portrait img {
-            width: 100px;
-            height: 100px;
-            border-radius: 0px;
-            object-fit: cover;
-        }
+            /*The portrait image box for the guess rows*/
+            .portrait img {
+                width: 100px;
+                height: 100px;
+                border-radius: 0px;
+                object-fit: cover;
+            }
 
         .green {
             background-color: #4caf50;
@@ -173,23 +174,23 @@
             white-space: nowrap;
         }
 
-        #suggestions .guess-row {
-            display: grid;
-            grid-template-columns: repeat(var(--column-count), 1fr);
-            gap: 5px;
-            align-items: center;
-            background-color: rgba(1,1,1,0.25);
-            cursor: pointer;
-            transition: background 0.2s;
-            min-width: fit-content;
-            height: 100px;
-            flex-shrink: 0;
-            white-space: nowrap;
-        }
+            #suggestions .guess-row {
+                display: grid;
+                grid-template-columns: repeat(var(--column-count), 1fr);
+                gap: 5px;
+                align-items: center;
+                background-color: rgba(1,1,1,0.25);
+                cursor: pointer;
+                transition: background 0.2s;
+                min-width: fit-content;
+                height: 100px;
+                flex-shrink: 0;
+                white-space: nowrap;
+            }
 
-        #suggestions .guess-row:hover {
-            background-color: black;
-        }
+                #suggestions .guess-row:hover {
+                    background-color: black;
+                }
 
             #suggestions .box {
                 padding: 10px;
@@ -199,7 +200,6 @@
                 height: 75px;
                 background: rgba(.3,.3,.3,0.25);
                 border-radius: 4px;
-
                 white-space: normal;
                 word-break: break-word;
                 overflow-wrap: break-word;
@@ -265,6 +265,20 @@
                 color: white;
                 font-size: 14px;
             }
+        /*Suggestion and result scroll settings*/
+        .scroll-wrapper {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+        .guess-row,
+        .suggestion-row {
+            min-width: max-content;
+            width: fit-content;
+            display: grid;
+            grid-template-columns: auto repeat(var(--text-column-count), minmax(80px, 1fr));
+            gap: 10px;
+        }
+
         /*Settings for the results screen*/
         .result-screen {
             position: fixed;
@@ -313,7 +327,7 @@
                 <p id="hintText" style="margin-top: 10px; font-size: 16px; color: white;"></p>
 
                 <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
-                <div id="suggestions" class="dropdown" style="display:none;">
+                <div id="suggestions" class="scroll-wrapper dropdown" style="display:none;">
                     <div class="guess-row preview-entry">
                         <div class="portrait">
                             <img src="portrait-url.jpg" alt="Name" />
@@ -325,7 +339,7 @@
                     <div class="guess-row labels" style="display:none;">
                         <div class="box" style="background:#ddd; color:#000;"></div>
                     </div>
-                    <div id="grid" class="grid-subcontainer"></div>
+                    <div id="grid" class="scroll-wrapper grid-subcontainer"></div>
                 </div>
             </div>
             <div id="resultScreen" class="result-screen" style="display: none;">
@@ -385,9 +399,9 @@
                 card.className = 'set-card';
                 card.dataset.set = key;
                 card.innerHTML = `
-                    <img src="${set.thumbnail}" alt="${set.label}" />
-                    <span>${set.label}</span>
-                `;
+                        <img src="${set.thumbnail}" alt="${set.label}" />
+                        <span>${set.label}</span>
+                    `;
 
                 card.addEventListener('click', () => loadSet(key));
                 selector.appendChild(card);
