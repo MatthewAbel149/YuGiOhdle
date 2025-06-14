@@ -467,16 +467,33 @@
                 const box = document.createElement('div');
 
                 if (attr === 'image') {
-                    box.className = 'portrait-header';
-                    box.textContent = isHeader ? '' : char[attr]; // blank label
-                } else {
-                    box.className = isHeader ? 'box header' : 'box';
-                    box.textContent = isHeader ? attr.toUpperCase() : (char[attr] ?? '—');
+                    box.className = isHeader ? 'portrait-header' : 'portrait';
 
-                    if (!isHeader && useFeedback) {
-                        const { color, arrow } = getAttributeFeedback(char[attr], mysteryCharacter[attr], attr);
-                        box.classList.add(color);
-                        box.textContent += arrow || '';
+                    if (isHeader) {
+                        box.textContent = ''; // no header label for image column
+                    } else {
+                        const image = document.createElement('img');
+                        image.src = char[attr];
+                        image.alt = char.name || '';
+                        box.appendChild(image);
+                    }
+
+                } else {
+                    const value = char[attr] ?? '—';
+
+                    if (isHeader) {
+                        box.className = 'box header';
+                        box.textContent = attr.toUpperCase();
+                    } else {
+                        box.className = 'box';
+
+                        if (useFeedback) {
+                            const { color, arrow } = getAttributeFeedback(value, mysteryCharacter[attr], attr);
+                            box.classList.add(color);
+                            box.textContent = value + (arrow || '');
+                        } else {
+                            box.textContent = value;
+                        }
                     }
                 }
 
