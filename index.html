@@ -378,22 +378,13 @@
             hintEl.textContent = `Recognizable card: ${randomHint}`;
         });
         //Detect set selection
-        function renderSetSelector(data) {
-            const selector = document.getElementById('setSelector');
-            selector.innerHTML = '';
-
-            Object.entries(data).forEach(([key, set]) => {
-                const card = document.createElement('div');
-                card.className = 'set-card';
-                card.dataset.set = key;
-                card.innerHTML = `
-                        <img src="${set.thumbnail}" alt="${set.label}" />
-                        <span>${set.label}</span>
-                    `;
-
-                card.addEventListener('click', () => loadSet(key));
-                selector.appendChild(card);
+        function renderHeaderRow() {
+            const headerRow = createCharacterRow({}, {
+                isHeader: true,
+                className: 'labels'
             });
+
+            gridContainer.appendChild(headerRow);
         }
         /*Detect restart*/
         document.getElementById('restartBtn').addEventListener('click', () => {
@@ -462,9 +453,10 @@
 
         function createCharacterRow(char, options = {}) {
             const {
-                useFeedback = false,   // for guess rows
-                onClick = null,        // for suggestion rows
-                className = ''         // e.g., 'preview-entry'
+                useFeedback = false,
+                onClick = null,
+                className = '',
+                isHeader = false
             } = options;
 
             const row = document.createElement('div');
@@ -475,27 +467,23 @@
                 const box = document.createElement('div');
 
                 if (attr === 'image') {
-                    box.className = 'portrait';
-                    box.innerHTML = `<img src="${char[attr]}" alt="${char.name}" />`;
+                    box.className = 'portrait-header';
+                    box.textContent = isHeader ? '' : char[attr]; // blank label
                 } else {
-                    let value = char[attr] || '—';
-                    let color = '';
-                    let arrow = '';
+                    box.className = isHeader ? 'box header' : 'box';
+                    box.textContent = isHeader ? attr.toUpperCase() : (char[attr] ?? '—');
 
-                    if (useFeedback) {
-                        const feedback = getAttributeFeedback(value, mysteryCharacter[attr]);
-                        color = feedback.color;
-                        arrow = feedback.arrow;
+                    if (!isHeader && useFeedback) {
+                        const { color, arrow } = getAttributeFeedback(char[attr], mysteryCharacter[attr], attr);
+                        box.classList.add(color);
+                        box.textContent += arrow || '';
                     }
-
-                    box.className = `box${color ? ` ${color}` : ''}`;
-                    box.textContent = value + (arrow || '');
                 }
 
                 row.appendChild(box);
             });
 
-            if (onClick) {
+            if (onClick && !isHeader) {
                 row.style.cursor = 'pointer';
                 row.addEventListener('click', onClick);
             }
