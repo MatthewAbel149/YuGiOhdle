@@ -59,9 +59,9 @@
       "height": "Not confirmed",
       "weight": "Not confirmed",
       "affiliation": "Unknown",
-      "Uses Magic?":  "No"
+      "Magic User":  "No"
     },
-    "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "alignment", "affiliation", "Uses Magic?" ],
+    "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "alignment", "affiliation", "Magic User" ],
     "characters": [
       {
         "name": "Yami Yugi",
@@ -71,8 +71,8 @@
         "height": "153",
         "weight": "42",
         "alignment": "Good",
-        "affiliation": "Yugi's Friends",
-        "Uses Magic?": "Yes",
+        "affiliation": "Yugi's Friends, Millennium Wielder, Spirit",
+        "Magic User": "Yes",
         "image": "images/DM/YamiYugi-DULI.png",
         "hints": [ "Dark Magician", "Slifer the Sky Dragon", "Black Luster Soldier" ]
       },
@@ -84,8 +84,8 @@
         "height": "153",
         "weight": "42",
         "alignment": "Good",
-        "affiliation": "Yugi's Friends",
-        "Uses Magic?": "Yes",
+        "affiliation": "Yugi's Friends, Millennium Wielder",
+        "Magic User": "Yes",
         "image": "images/DM/YugiMuto-DULI.png",
         "hints": [ "Dark Magician", "Gandora the Dragon of Destruction", "Silent Swordsman LV10" ]
       },
@@ -109,8 +109,8 @@
         "height": "188",
         "weight": "65",
         "alignment": "Evil",
-        "affiliation": "Primary Antagonist, Corporation",
-        "Uses Magic?": "Yes",
+        "affiliation": "Primary Antagonist, Corporation, Millennium Wielder",
+        "Magic User": "Yes",
         "image": "images/DM/MaximillionPegasus-DULI.png",
         "hints": [ "Thousand-Eyes Restrict", "Toon World", "Relinquished" ]
       },
@@ -134,8 +134,8 @@
         "height": "176",
         "weight": "52",
         "alignment": "Evil",
-        "affiliation": "Primary Antagonist",
-        "Uses Magic?": "Yes",
+        "affiliation": "Primary Antagonist, Millennium Wielder, Spirit",
+        "Magic User": "Yes",
         "image": "images/DM/YamiBakura-DULI.png",
         "hints": [ "Dark Necrofear", "Destiny Board", "Dark Sanctuary" ]
       },
@@ -147,8 +147,8 @@
         "height": "176",
         "weight": "52",
         "alignment": "Good",
-        "affiliation": "Yugi's Friends",
-        "Uses Magic?": "Yes",
+        "affiliation": "Yugi's Friends, Millennium Wielder",
+        "Magic User": "Yes",
         "image": "images/DM/Bakura.png",
         "hints": [ "Change of Heart" ]
       },
@@ -219,7 +219,7 @@
         "hair": "Blue",
         "alignment": "Evil",
         "affiliation": "Primary Antagonist, Corporation, Doma",
-        "Uses Magic?": "Yes",
+        "Magic User": "Yes",
         "image": "images/DM/Dartz.png",
         "hints": [ "Divine Serpent Geh", "Orichalcos Shunoros", "Mirror Knight Calling" ]
       },
@@ -252,8 +252,8 @@
         "gender": "Male",
         "episode": "40",
         "alignment": "Good",
-        "affiliation": "Millennium Guardian",
-        "Uses Magic?": "Yes",
+        "affiliation": "Millennium Wielder, Spirit",
+        "Magic User": "Yes",
         "image": "images/DM/Shadi.png",
         "hints": [ "None" ]
       },
@@ -294,8 +294,8 @@
         "gender": "Male",
         "episode": "13",
         "hair": "Blue",
-        "occupation": "Pro-Duelist, Minion",
-        "affiliation": "Antagonist",
+        "alignment": "Evil",
+        "affiliation": "Minion",
         "image": "images/DM/PaniK-LOD.png",
         "hints": [ "Castle of Dark Illusions", "King of Yamimakai", "Chaos Shield" ]
       },
@@ -359,8 +359,8 @@
         "height": "180",
         "weight": "55",
         "alignment": "Evil",
-        "affiliation": "Primary Antagonist, Rare Hunters",
-        "Uses Magic?": "Yes",
+        "affiliation": "Primary Antagonist, Millennium Wielder, Rare Hunters",
+        "Magic User": "Yes",
         "image": "images/DM/MarikIshtar-DULI.png",
         "hints": [ "The Winged Dragon of Ra", "Revival Jam", "Slifer the Sky Dragon" ]
       },
@@ -372,8 +372,8 @@
         "height": "180",
         "weight": "55",
         "alignment": "Evil",
-        "affiliation": "Primary Antagonist, Rare Hunters",
-        "Uses Magic?": "Yes",
+        "affiliation": "Primary Antagonist, Millennium Wielder, Rare Hunters, Spirit",
+        "Magic User": "Yes",
         "image": "images/DM/YamiMarik-DULI.png",
         "hints": [ "The Winged Dragon of Ra", "Lava Golem", "Egyptian God Slime" ]
       },
@@ -385,8 +385,8 @@
         "height": "167",
         "weight": "43",
         "alignment": "Good",
-        "affiliation": "Millennium Guardian",
-        "Uses Magic?": "Yes",
+        "affiliation": "Millennium Wielder",
+        "Magic User": "Yes",
         "image": "images/DM/IshizuIshtar.png",
         "hints": [ "Mudora", "Blast Held by a Tribute", "Exchange of the Spirit" ]
       },
@@ -492,7 +492,7 @@
         "hair": "Black",
         "alignment": "Evil",
         "affiliation": "Minion, Rare Hunters",
-        "Uses Magic?": "Yes",
+        "Magic User": "Yes",
         "image": "images/DM/Arkana.png",
         "hints": [ "Dark Magician", "Thousand Knives", "Dark Magic Curtain" ]
       },
@@ -537,54 +537,112 @@
         "hints": [ "Gate Guardian", "Labyrinth Wall", "Wall Shadow" ]
       },
       {
-        "name": "Crump",
+        "name": "The Big Five",
         "gender": "Male",
         "episode": "8",
-        "hair": "Black",
+        "hair": "Brown, Black, Gray",
         "alignment": "Evil",
         "affiliation": "Corporation, Big Five",
-        "image": "images/DM/Crump.png",
-        "hints": [ "Nightmare Penguin", "Defender Iceberg", "Penguin Torpedo" ]
+        "image": "images/DM/TheBigFive.png",
+        "hints": [ "Five-Headed Dragon", "Berserk Dragon", "Dragon Revival Ritual" ]
       },
       {
-        "name": "Nezbit",
+        "name": "Mahad",
         "gender": "Male",
-        "episode": "8",
+        "episode": "201",
         "hair": "Brown",
-        "alignment": "Evil",
-        "affiliation": "Corporation, Big Five",
-        "image": "images/DM/nezbit.png",
-        "hints": [ "Robotic Knight", "Perfect Machine King", "Recycling Plant" ]
+        "alignment": "Good",
+        "affiliation": "Sacred Guardian, Millennium Wielder, Spirit",
+        "Magic User": "Yes",
+        "image": "images/DM/Mahad.png",
+        "hints": [ "Dark Magician", "Illusion Magician", "Shadow Ghoul" ]
       },
       {
-        "name": "Johnson",
-        "gender": "Male",
-        "episode": "8",
+        "name": "Kisara",
+        "gender": "Female",
+        "episode": "94",
+        "hair": "White",
+        "alignment": "Neutral",
+        "affiliation": "Spirit",
+        "image": "images/DM/Kisara.png",
+        "hints": [ "Maiden with Eyes of Blue", "Blue-Eyes White Dragon" ]
+      },
+      {
+        "name": "Mana",
+        "gender": "Female",
+        "episode": "203",
         "hair": "Brown",
-        "alignment": "Evil",
-        "affiliation": "Corporation, Big Five",
-        "image": "images/DM/Johnson.png",
-        "hints": [ "Judge Man", "Hysteric Angel", "Sinister Justice" ]
+        "alignment": "Good",
+        "affiliation": "Sacred Guardian",
+        "Magic User": "Yes",
+        "image": "images/DM/Mana.png",
+        "hints": [ "Dark Magician Girl" ]
       },
       {
-        "name": "Gansley",
+        "name": "Shada",
         "gender": "Male",
-        "episode": "8",
+        "episode": "201",
+        "hair": "Bald",
+        "alignment": "Good",
+        "affiliation": "Sacred Guardian, Millennium Wielder",
+        "Magic User": "Yes",
+        "image": "images/DM/Shada.png",
+        "hints": [ "Zelua", "Two-Headed Jackal Warrior" ]
+      },
+      {
+        "name": "Isis",
+        "gender": "Female",
+        "episode": "201",
+        "hair": "Brown",
+        "alignment": "Good",
+        "affiliation": "Sacred Guardian, Millennium Wielder",
+        "Magic User": "Yes",
+        "image": "images/DM/Isis.png",
+        "hints": [ "Spiria", "Mystical Elf", "Winged Dragon, Guardian of the Fortress #1" ]
+      },
+      {
+        "name": "Shimon Muran",
+        "gender": "Male",
+        "episode": "201",
+        "hair": "Gray",
+        "alignment": "Good",
+        "affiliation": "Sacred Guardian, Millennium Wielder",
+        "Magic User": "Yes",
+        "image": "images/DM/Shimon.png",
+        "hints": [ "Exodia, The Forbidden One" ]
+      },
+      {
+        "name": "Aknadin",
+        "gender": "Male",
+        "episode": "201",
         "hair": "Gray",
         "alignment": "Evil",
-        "affiliation": "Corporation, Big Five",
-        "image": "images/DM/Gansley.png",
-        "hints": [ "Deepsea Warrior" ]
+        "affiliation": "Sacred Guardian, Millennium Wielder",
+        "Magic User": "Yes",
+        "image": "images/DM/Akhenaden.png",
+        "hints": [ "", "", "" ]
       },
       {
-        "name": "Leichter",
+        "name": "Aknamkanon",
         "gender": "Male",
-        "episode": "8",
-        "hair": "Brown",
-        "alignment": "Evil",
-        "affiliation": "Corporation, Big Five",
-        "image": "images/DM/Leichter.png",
-        "hints": [ "Jinzo", "Injection Fairy Lily", "Imperial Order" ]
+        "episode": "202",
+        "hair": "Gray",
+        "alignment": "Good",
+        "affiliation": "Millennium Wielder",
+        "Magic User": "Yes",
+        "image": "images/DM/Aknamkanon.png",
+        "hints": [ "None" ]
+      },
+      {
+        "name": "",
+        "gender": "Male",
+        "episode": "",
+        "hair": "",
+        "alignment": "",
+        "affiliation": "",
+        "Magic User": "Yes",
+        "image": "images/DM/.png",
+        "hints": [ "", "", "" ]
       }
     ]
   },
