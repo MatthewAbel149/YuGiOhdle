@@ -406,6 +406,7 @@
         let characters = [];
         let mysteryCharacter = null;
         let activeAttributes = [];
+        let defaultValues = [];
         const guessedCharacters = new Set();
         let gameOver = false;
         let hintIndex = 0;
@@ -626,29 +627,34 @@
             showSuggestions(e.target.value);
         });
 
+        function getArcForEpisode(episode) {
+            for (const entry of arcMap) {
+                if (episode >= entry.start && episode <= entry.end) {
+                    return entry.arc;
+                }
+            }
+            return 'Unknown Arc';
+        }
+
         function loadSet(setKey) {
             const set = characterSets[setKey];
             if (!set) return;
 
+            const defaults = set.defaults || {};
             const arcMap = set.arcMap || [];
-
-            function getArcForEpisode(episode) {
-                for (const entry of arcMap) {
-                    if (episode >= entry.start && episode <= entry.end) {
-                        return entry.arc;
-                    }
-                }
-                return 'Unknown Arc';
-            }
+            activeAttributes = set.attributes || [];
 
             // Dynamically assign arc if missing
             characters = set.characters.map(char => {
-                if ('episode' in char) {
-                    return { ...char, arc: getArcForEpisode(Number(char.episode)) };
+                const combined = { ...defaults, ...char };
+
+                // override arc if using arcMap
+                if (!char.arc && arcMap.length > 0) {
+                    combined.arc = getArcForEpisode(combined.episode, arcMap);
                 }
-                return char;
+
+                return combined;
             });
-            activeAttributes = set.attributes || [];
             mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
             guessedCharacters.clear();
             gameOver = false;
