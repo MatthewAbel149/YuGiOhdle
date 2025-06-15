@@ -627,7 +627,7 @@
             showSuggestions(e.target.value);
         });
 
-        function getArcForEpisode(episode) {
+        function getArcForEpisode(episode, arcMap) {
             for (const entry of arcMap) {
                 if (episode >= entry.start && episode <= entry.end) {
                     return entry.arc;
@@ -650,7 +650,7 @@
 
                 // override arc if using arcMap
                 if (!char.arc && arcMap.length > 0) {
-                    combined.arc = getArcForEpisode(combined.episode, arcMap);
+                    combined.arc = getArcForEpisode(Number(combined.episode), arcMap);
                 }
 
                 return combined;
