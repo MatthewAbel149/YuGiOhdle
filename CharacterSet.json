@@ -620,7 +620,7 @@
         "affiliation": "Sacred Guardian, Millennium Wielder",
         "Magic User": "Yes",
         "image": "images/DM/Akhenaden.png",
-        "hints": [ "", "", "" ]
+        "hints": [ "Gadius" ]
       },
       {
         "name": "Aknamkanon",
@@ -632,17 +632,6 @@
         "Magic User": "Yes",
         "image": "images/DM/Aknamkanon.png",
         "hints": [ "None" ]
-      },
-      {
-        "name": "",
-        "gender": "Male",
-        "episode": "",
-        "hair": "",
-        "alignment": "",
-        "affiliation": "",
-        "Magic User": "Yes",
-        "image": "images/DM/.png",
-        "hints": [ "", "", "" ]
       }
     ]
   },
