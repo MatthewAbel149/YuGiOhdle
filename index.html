@@ -592,7 +592,8 @@
         function showSuggestions(value) {
             const matches = characters.filter(c => {
                 const queryLower = value.toLowerCase();
-                const allNames = [char.name, ...(char.aliases || [])].map(n => n.toLowerCase());
+                const allNames = [c.name, ...(c.aliases || [])]
+                    .map(n => n.toLowerCase());
                 return allNames.some(name => name.includes(queryLower));
             });
             matches.sort(function (a, b) {
