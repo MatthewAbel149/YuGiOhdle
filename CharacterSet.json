@@ -722,7 +722,7 @@
       "arc": "None",
       "alignment": "Unknown",
       "affiliation": "Unknown",
-        "species":  "Human"
+      "species":  "Human"
     },
     "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "alignment", "affiliation", "species" ],
     "characters": [
@@ -734,7 +734,7 @@
         "height": "165.7",
         "alignment":  "Good",
         "affiliation": "Student",
-        "species": "",
+        "species": ""
       },
       {
         "image": "",
