@@ -590,12 +590,10 @@
         }
 
         function showSuggestions(value) {
-            const matches = characters.filter(c => {
-                const queryLower = value.toLowerCase();
-                const allNames = [c.name, ...(c.aliases || [])]
-                    .map(n => n.toLowerCase());
-                return allNames.some(name => name.includes(queryLower));
-            });
+            const matches = characters.filter(c =>
+                c.name.toLowerCase().includes(value.toLowerCase()) &&
+                !guessedCharacters.has(c.name)
+            );
             matches.sort(function (a, b) {
                 var textA = a.name.toUpperCase();
                 var textB = b.name.toUpperCase();

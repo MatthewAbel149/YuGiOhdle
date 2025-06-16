@@ -727,7 +727,7 @@
     "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "alignment", "affiliation", "species" ],
     "characters": [
       {
-        "image": "",
+        "image": "images/GX/Jaden.png",
         "name": "Jaden Yuki",
         "gender": "Male",
         "episode": "1",
@@ -735,16 +735,6 @@
         "alignment":  "Good",
         "affiliation": "Student",
         "species": ""
-      },
-      {
-        "image": "",
-        "name": "",
-        "gender": "",
-        "episode": "",
-        "alignment": "",
-        "affiliation": "",
-        "species": "",
-        "hints": ["","",""]
       }
     ]
   },
