@@ -590,10 +590,13 @@
         }
 
         function showSuggestions(value) {
-            const matches = characters.filter(c =>
-                c.name.toLowerCase().includes(value.toLowerCase()) &&
-                !guessedCharacters.has(c.name)
-            );
+            const queryLower = value.toLowerCase();
+
+            const matches = characters.filter(c => {
+                const allNames = [c.name, ...(Array.isArray(c.aliases) ? c.aliases : [])];
+                return allNames.some(name => name.toLowerCase().includes(queryLower));
+            });
+
             matches.sort(function (a, b) {
                 var textA = a.name.toUpperCase();
                 var textB = b.name.toUpperCase();
@@ -616,11 +619,11 @@
                         handleGuess(char);
                     }
                 });
-
+                row.style.gridTemplateColumns = `repeat(${activeAttributes.length}, 100px)`;
                 suggestionsBox.appendChild(row);
             });
 
-            suggestionsBox.style.display = 'block';
+            suggestionsBox.style.display = matches.length > 0 ? 'block' : 'none';
         }
 
         searchInput.addEventListener('input', e => {
