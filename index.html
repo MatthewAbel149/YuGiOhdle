@@ -433,7 +433,7 @@
 
             // Select a single random hint
             const randomHint = hints[Math.floor(Math.random() * hints.length)];
-            hintEl.textContent = `Recognizable card: ${randomHint}`;
+            hintEl.textContent = `${randomHint}`;
         });
         //Detect set selection
         function renderSetSelector(data) {
@@ -590,10 +590,11 @@
         }
 
         function showSuggestions(value) {
-            const matches = characters.filter(c =>
-                c.name.toLowerCase().includes(value.toLowerCase()) &&
-                !guessedCharacters.has(c.name)
-            );
+            const matches = characters.filter(c => {
+                const queryLower = value.toLowerCase();
+                const allNames = [char.name, ...(char.aliases || [])].map(n => n.toLowerCase());
+                return allNames.some(name => name.includes(queryLower));
+            });
             matches.sort(function (a, b) {
                 var textA = a.name.toUpperCase();
                 var textB = b.name.toUpperCase();

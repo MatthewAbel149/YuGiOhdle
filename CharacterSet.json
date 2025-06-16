@@ -52,6 +52,7 @@
     "defaults": {
       "image": "images/assets/TheVagabond.png",
       "name": "Unknown",
+      "aliases": [ "" ],
       "gender": "Unknown",
       "hair":  "Unknown",
       "episode": 0,
@@ -65,6 +66,7 @@
     "characters": [
       {
         "name": "Yami Yugi",
+        "aliases": [ "Dark Yugi" ], 
         "gender": "Male",
         "episode": "1",
         "hair": "Black",
@@ -78,6 +80,7 @@
       },
       {
         "name": "Yugi Muto",
+        "aliases": [ "Yugi Motou" ],
         "gender": "Male",
         "episode": "1",
         "hair": "Black",
@@ -103,6 +106,7 @@
       },
       {
         "name": "Maximillion Pegasus",
+        "aliases": [ "Pegasus J. Crawford" ],
         "gender": "Male",
         "episode": "1",
         "hair": "Gray",
@@ -116,6 +120,7 @@
       },
       {
         "name": "Joey Wheeler",
+        "aliases": [ "Katsuya Jonouchi" ],
         "gender": "Male",
         "episode": "1",
         "hair": "Blonde",
@@ -128,6 +133,7 @@
       },
       {
         "name": "Yami Bakura",
+        "aliases": [ "Dark Bakura" ],
         "gender": "Male",
         "episode": "12",
         "hair": "White",
@@ -141,6 +147,7 @@
       },
       {
         "name": "Bakura Ryou",
+        "aliases": [ "Ryo Bakura" ],
         "gender": "Male",
         "episode": "1",
         "hair": "White",
@@ -154,6 +161,7 @@
       },
       {
         "name": "Solomon Muto",
+        "aliases": [ "Sugoroku Mutou" ],
         "gender": "Male",
         "episode": "1",
         "hair": "Gray",
@@ -178,6 +186,7 @@
       },
       {
         "name": "Mai Valentine",
+        "aliases": [ "Mai Kujaku" ],
         "gender": "Female",
         "episode": "3",
         "hair": "Blonde",
@@ -190,6 +199,7 @@
       },
       {
         "name": "Weevil Underwood",
+        "aliases": [ "Insector Haga" ],
         "gender": "Male",
         "episode": "2",
         "hair": "Green",
@@ -202,6 +212,7 @@
       },
       {
         "name": "Rex Raptor",
+        "aliases": [ "Dinosaur Ryuzaki" ],
         "gender": "Male",
         "episode": "2",
         "hair": "Brown",
@@ -225,6 +236,7 @@
       },
       {
         "name": "Tristan Taylor",
+        "aliases": [ "Hiroto Honda" ],
         "gender": "Male",
         "episode": "1",
         "hair": "Brown",
@@ -237,6 +249,7 @@
       },
       {
         "name": "Mako Tsunami",
+        "aliases": [ "Ryota Kajiki" ],
         "gender": "Male",
         "episode": "7",
         "hair": "Black",
@@ -248,9 +261,11 @@
         "hints": [ "The Legendary Fisherman", "Umi", "Fortress Whale" ]
       },
       {
-        "name": "Shadi",
+        "name": "Shadi Shin",
+        "aliases": [ "Hasan" ],
         "gender": "Male",
         "episode": "40",
+        "hair": "Bald",
         "alignment": "Good",
         "affiliation": "Millennium Wielder, Spirit",
         "Magic User": "Yes",
@@ -259,6 +274,7 @@
       },
       {
         "name": "Leon von Schroeder",
+        "aliases": [ "Leon Wilson" ],
         "gender": "Male",
         "episode": "185",
         "hair": "Red",
@@ -269,6 +285,7 @@
       },
       {
         "name": "Zigfried von Schroeder",
+        "aliases": [ "Siegfried von Schroeder" ],
         "gender": "Male",
         "episode": "185",
         "hair": "Pink, Red",
@@ -279,6 +296,7 @@
       },
       {
         "name": "Espa Roba",
+        "aliases": [ "Esper Roba" ],
         "gender": "Male",
         "episode": "54",
         "hair": "Green",
@@ -291,6 +309,7 @@
       },
       {
         "name": "PaniK",
+        "aliases": [ "Player Killer of Darkness" ],
         "gender": "Male",
         "episode": "13",
         "hair": "Blue",
@@ -301,6 +320,7 @@
       },
       {
         "name": "Rafael",
+        "aliases": [ "Raphael" ],
         "gender": "Male",
         "episode": "145",
         "hair": "Blonde",
@@ -311,6 +331,7 @@
       },
       {
         "name": "Odion",
+        "aliases": [ "Rishid" ],
         "gender": "Male",
         "episode": "60",
         "hair": "Bald, Black",
@@ -321,6 +342,7 @@
       },
       {
         "name": "Bandit Keith",
+        "aliases": [ "Keith Howard" ],
         "gender": "Male",
         "episode": "16",
         "hair": "Blonde",
@@ -353,6 +375,7 @@
       },
       {
         "name": "Marik Ishtar",
+        "aliases": [ "Malik Ishtar" ],
         "gender": "Male",
         "episode": "50",
         "hair": "White",
@@ -366,6 +389,7 @@
       },
       {
         "name": "Yami Marik",
+        "aliases": [ "Dark Marik" ],
         "gender": "Male",
         "episode": "89",
         "hair": "White",
@@ -379,6 +403,7 @@
       },
       {
         "name": "Ishizu Ishtar",
+        "aliases": [ "Isis Ishtar" ],
         "gender": "Female",
         "episode": "52",
         "hair": "Black",
@@ -392,6 +417,7 @@
       },
       {
         "name": "Rebecca Hawkins",
+        "aliases": [ "Rebecca Hopkins" ],
         "gender": "Female",
         "episode": "41",
         "hair": "Blonde",
@@ -402,6 +428,7 @@
       },
       {
         "name": "Arthur Hawkins",
+        "aliases": [ "Arthur Hopkins" ],
         "gender": "Male",
         "episode": "41",
         "hair": "Gray",
@@ -412,6 +439,7 @@
       },
       {
         "name": "Tea Gardner",
+        "aliases": [ "Anzu Mazaki" ],
         "gender": "Female",
         "episode": "1",
         "hair": "Brown",
@@ -424,6 +452,7 @@
       },
       {
         "name": "Duke Devlin",
+        "aliases": [ "Ryuji Otogi" ],
         "gender": "Male",
         "episode": "46",
         "hair": "Black",
@@ -446,6 +475,7 @@
       },
       {
         "name": "Serenity Wheeler",
+        "aliases": [ "Shizuka Kawai" ],
         "gender": "Female",
         "episode": "3",
         "hair": "Brown",
@@ -456,6 +486,7 @@
       },
       {
         "name": "Alister",
+        "aliases": [ "Amelda" ],
         "gender": "Male",
         "episode": "145",
         "hair": "Red",
@@ -477,6 +508,7 @@
       },
       {
         "name": "Lumis and Umbra",
+        "aliases": [ "Mask of Light", "Mask of Darkness" ],
         "gender": "Male",
         "episode": "70",
         "hair": "Blue, Bald",
@@ -487,6 +519,7 @@
       },
       {
         "name": "Arkana",
+        "aliases": [ "Pandora" ],
         "gender": "Male",
         "episode": "60",
         "hair": "Black",
@@ -498,6 +531,7 @@
       },
       {
         "name": "Bonz",
+        "aliases": [ "Ghost Kozuka" ],
         "gender": "Male",
         "episode": "29",
         "hair": "Blue",
@@ -508,6 +542,7 @@
       },
       {
         "name": "Strings",
+        "aliases": [ "The Quiet One", "Doll", "Pantomimer" ],
         "gender": "Male",
         "episode": "65",
         "hair": "Bald",
@@ -528,6 +563,7 @@
       },
       {
         "name": "Paradox Brothers",
+        "aliases": [ "Mei", "Kyu", "Labyrinth Brothers" ],
         "gender": "Male",
         "episode": "19",
         "hair": "Bald",
@@ -548,6 +584,7 @@
       },
       {
         "name": "Mahad",
+        "aliases": [ "Mahado", "Dark Magician" ],
         "gender": "Male",
         "episode": "201",
         "hair": "Brown",
@@ -591,6 +628,7 @@
       },
       {
         "name": "Isis",
+        "aliases": [ "Shinkan Aishisu" ],
         "gender": "Female",
         "episode": "201",
         "hair": "Brown",
@@ -602,6 +640,7 @@
       },
       {
         "name": "Shimon Muran",
+        "aliases": [ "Siamun Muran" ],
         "gender": "Male",
         "episode": "201",
         "hair": "Gray",
@@ -612,7 +651,20 @@
         "hints": [ "Exodia, The Forbidden One" ]
       },
       {
+        "name": "Karim",
+        "aliases": [ "Kalim" ],
+        "gender": "Male",
+        "episode": "201",
+        "hair": "Black",
+        "alignment": "Good",
+        "affiliation": "Sacred Guardian, Millennium Wielder",
+        "Magic User": "Yes",
+        "image": "images/DM/Karim.png",
+        "hints": [ "Curse of Dragon", "Helimai", "Bastet" ]
+      },
+      {
         "name": "Aknadin",
+        "aliases": [ "Akhenaden", "Great Priest of Darkness", "Great Shadow Magus" ],
         "gender": "Male",
         "episode": "201",
         "hair": "Gray",
@@ -624,6 +676,7 @@
       },
       {
         "name": "Aknamkanon",
+        "aliases": [ "Akhenamkhanen" ],
         "gender": "Male",
         "episode": "202",
         "hair": "Gray",
@@ -660,25 +713,38 @@
         "end": 180
       }
     ],
-    "attributes": [ "name", "gender", "episode", "arc", "height", "occupation", "dorm" ],
+    "defaults": {
+      "image": "images/assets/TheVagabond.png",
+      "name": "Unknown",
+      "gender": "Unknown",
+      "hair": "Unknown",
+      "episode": "0",
+      "arc": "None",
+      "alignment": "Unknown",
+      "affiliation": "Unknown",
+        "species":  "Human"
+    },
+    "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "alignment", "affiliation", "species" ],
     "characters": [
       {
+        "image": "",
         "name": "Jaden Yuki",
         "gender": "Male",
         "episode": "1",
         "height": "165.7",
-        "occupation": "Student",
-        "dorm": "Slifer Red",
-        "image": ""
+        "alignment":  "Good",
+        "affiliation": "Student",
+        "species": "",
       },
       {
+        "image": "",
         "name": "",
         "gender": "",
         "episode": "",
-        "height": "",
-        "occupation": "",
-        "dorm": "",
-        "image": ""
+        "alignment": "",
+        "affiliation": "",
+        "species": "",
+        "hints": ["","",""]
       }
     ]
   },
