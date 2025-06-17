@@ -773,7 +773,7 @@
       "aliases": [ "" ],
       "gender": "Unknown",
       "hair": "Unknown",
-      "episode": "0",
+      "episode": 0,
       "final Episode": "0",
       "arc": "None",
       "height": "Not confirmed",
@@ -785,7 +785,7 @@
       "major Character": "No",
       "hints": [ "Never dueled" ]
     },
-    "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "wins", "losses", "duels", "affiliation" ],
+    "attributes": [ "image", "name", "gender", "arc", "episode", "final Episode", "hair", "wins", "losses", "duels", "affiliation" ],
     "characters": [
       {
         "image": "images/5DS/Andre.png",
