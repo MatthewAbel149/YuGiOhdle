@@ -793,7 +793,7 @@
         "aliases": [ "Andore" ],
         "gender": "Male",
         "episode": "73",
-        "final Episode": "104", //TODO fact check
+        "final Episode": "104",
         "hair": "Red",
         "affiliation": "Team Unicorn",
         "duels": "7",
@@ -808,7 +808,7 @@
         "aliases": [ "Aporia of Despair" ],
         "gender": "Male",
         "episode": "134",
-        "final Episode": "147", //TODO fact check
+        "final Episode": "147",
         "wins": "0",
         "losses": "3",
         "hair": "White, Red",
@@ -1127,7 +1127,7 @@
         "aliases": [ "Mr. Izinski", "Hideo Izayoi" ],
         "gender": "Male",
         "episode": "40",
-        "final Episode": "148", //TODO fact check
+        "final Episode": "148",
         "wins": "0",
         "losses": "0",
         "duels": "1",
