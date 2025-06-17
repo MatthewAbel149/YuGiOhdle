@@ -116,7 +116,7 @@
                 height: 60px;
             }
 
-            .guess-row {
+        .guess-row {
             display: grid;
             gap: 10px;
             margin-bottom: 10px;
@@ -230,7 +230,7 @@
         }
 
         .set-selector {
-            width: 100%;
+            width: 300px;
             background: #222;
             padding: 20px 10px;
             display: flex;
@@ -331,14 +331,16 @@
             align-items: center;
             flex-shrink: 0;
         }
+
         .portrait-header {
             height: 60px;
         }
-            .portrait img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
+
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
         .box, .header {
             /*font-family:*/
@@ -358,11 +360,13 @@
             overflow-x: auto;
             max-width: 100vw;
         }
+
         .guess-row, .suggestion-row {
             display: grid;
             white-space: nowrap;
             min-width: max-content;
         }
+
         @media (max-width: 768px) {
             .box, .header, .portrait, .portrait-header {
                 width: 72px;
@@ -376,22 +380,21 @@
     <div class="container">
         <div class="game-panel">
             <div class="game-container">
-
-                <h1>Yu-Gi-Oh!dle</h1>
-
-                <button id="hintBtn">Get Hint</button>
-                <p id="hintText" style="margin-top: 10px; font-size: 16px; color: white;"></p>
-
-                <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
                 <div class="scroll-wrapper">
+
+                    <h1>Yu-Gi-Oh!dle</h1>
+
+                    <button id="hintBtn">Get Hint</button>
+                    <p id="hintText" style="margin-top: 10px; font-size: 16px; color: white;"></p>
+                    <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
+                    
                     <div id="suggestions" class="dropdown" style="display:none;">
                         <div class="guess-row preview-entry">
                             <div class="portrait"></div>
                             <div class="box"></div>
                         </div>
                     </div>
-                </div>
-                <div class="scroll-wrapper">
+
                     <div class="grid-container">
                         <div class="guess-row labels" style="display:none;">
                             <div class="box" style="background:#ddd; color:#000;"></div>
@@ -400,15 +403,15 @@
                     </div>
                 </div>
             </div>
-            <div id="resultScreen" class="result-screen" style="display: none;">
-                <h2>You guessed correctly!</h2>
-                <img id="resultImage" src="" alt="Character" />
-                <p id="resultName"></p>
-                <button id="restartBtn">Play Again</button>
-            </div>
-            <h2 style="text-align:center; color:white;">Choose a Character Set</h2>
-            <footer class="set-selector" id="setSelector"></footer>
         </div>
+        <div id="resultScreen" class="result-screen" style="display: none;">
+            <h2>You guessed correctly!</h2>
+            <img id="resultImage" src="" alt="Character" />
+            <p id="resultName"></p>
+            <button id="restartBtn">Play Again</button>
+        </div>
+        <h2 style="text-align:center; color:white;">Choose a Character Set</h2>
+        <footer class="set-selector" id="setSelector"></footer>
     </div>
     <script>
         let characterSets = {};
@@ -454,9 +457,9 @@
                 card.className = 'set-card';
                 card.dataset.set = key;
                 card.innerHTML = `
-                                <img src="${set.thumbnail}" alt="${set.label}" />
-                                <span>${set.label}</span>
-                            `;
+                                        <img src="${set.thumbnail}" alt="${set.label}" />
+                                        <span>${set.label}</span>
+                                    `;
 
                 card.addEventListener('click', () => loadSet(key));
                 selector.appendChild(card);
