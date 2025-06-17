@@ -685,13 +685,17 @@
         /* Default to loading DM */
         window.addEventListener('DOMContentLoaded', () => {
             fetch('CharacterSet.json')
-                .then(res => res.json())
+                .then(res => {
+                    if (!res.ok) throw new Error(`HTTP error ${res.status}`);
+                    return res.json();
+                })
                 .then(data => {
                     characterSets = data;
-                    renderSetSelector(data);
-                    loadSet('DM'); // Default set on page load
+                    loadSet(defaultSetKey); // or however you initialize
                 })
-                .catch(err => console.error('Failed to load character sets:', err));
+                .catch(error => {
+                    console.error('Failed to load character sets:', error);
+                });
         });
     </script>
 
