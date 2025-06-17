@@ -370,6 +370,31 @@
                 font-size: 12px;
             }
         }
+        /*Portrait-name stack for entries*/
+        .portrait-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .portrait-img {
+            width: 100%;
+            height: 70%;
+            object-fit: contain;
+        }
+
+        .portrait-name {
+            font-size: 12px;
+            text-align: center;
+            margin-top: 4px;
+            line-height: 1;
+            height: 30%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     </style>
 </head>
 <body>
@@ -549,10 +574,21 @@
                         box.innerHTML = '&nbsp;';
                         box.style.backgroundColor = 'transparent';
                     } else {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = 'portrait-wrapper';
+
                         const image = document.createElement('img');
                         image.src = char[attr] || '';
                         image.alt = char.name || '';
-                        box.appendChild(image);
+                        image.className = 'portrait-img';
+
+                        const caption = document.createElement('div');
+                        caption.className = 'portrait-name';
+                        caption.textContent = char.name || '';
+
+                        wrapper.appendChild(image);
+                        wrapper.appendChild(caption);
+                        box.appendChild(wrapper);
                     }
                 } else if (isHeader) {
                     // HEADER CELL

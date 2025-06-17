@@ -63,7 +63,7 @@
       "Magic User": "No",
       "hints": [ "Never Duels" ]
     },
-    "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "alignment", "affiliation", "Magic User" ],
+    "attributes": [ "image", "gender", "arc", "episode", "hair", "alignment", "affiliation", "Magic User" ],
     "characters": [
       {
         "name": "Yami Yugi",
@@ -723,7 +723,7 @@
       "affiliation": "Unknown",
       "species":  "Human"
     },
-    "attributes": [ "image", "name", "gender", "arc", "episode", "hair", "alignment", "affiliation", "species" ],
+    "attributes": [ "image", "gender", "arc", "episode", "hair", "alignment", "affiliation", "species" ],
     "characters": [
       {
         "image": "images/GX/Jaden.png",
@@ -785,7 +785,7 @@
       "major Character": "No",
       "hints": [ "Never dueled" ]
     },
-    "attributes": [ "image", "name", "gender", "arc", "episode", "final Episode", "hair", "wins", "losses", "duels", "affiliation" ],
+    "attributes": [ "image", "gender", "arc", "episode", "final Episode", "hair", "wins", "losses", "duels", "affiliation" ],
     "characters": [
       {
         "image": "images/5DS/Andre.png",
