@@ -691,7 +691,8 @@
                 })
                 .then(data => {
                     characterSets = data;
-                    loadSet(defaultSetKey); // or however you initialize
+                    renderSetSelector(data);
+                    loadSet('DM'); // or however you initialize
                 })
                 .catch(error => {
                     console.error('Failed to load character sets:', error);
