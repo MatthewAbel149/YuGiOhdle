@@ -590,6 +590,10 @@
         }
 
         function showSuggestions(value) {
+            if (!value.trim()) {
+                suggestionsBox.style.display = 'none';
+                return;
+            }
             const queryLower = value.toLowerCase();
 
             const matches = characters.filter(c => {
