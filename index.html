@@ -376,27 +376,25 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            width: 100%;
             height: 100%;
-            overflow: hidden;
+            width: 100%;
         }
 
         .portrait-img {
+            height: 64px; /* try 60–70px */
             width: 100%;
-            height: 70%; /* fixed height */
-            object-fit: cover; /* or use 'cover' if you prefer cropping */
-            display: block;
+            object-fit: contain;
         }
-
         .portrait-name {
             font-size: 11px;
-            line-height: 1.2;
             text-align: center;
             margin-top: 4px;
-            max-height: 30%;
+            padding: 0 2px;
+            max-height: 32px;
             overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            line-height: 1.2;
+            white-space: normal; /* 🔄 allow line wrapping */
+            word-break: break-word;
         }
     </style>
 </head>
