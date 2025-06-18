@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -117,7 +117,7 @@
                 height: 60px;
             }
 
-            .guess-row {
+        .guess-row {
             display: grid;
             gap: 10px;
             margin-bottom: 10px;
@@ -221,7 +221,7 @@
                 max-height: 100px;
                 object-fit: cover;
                 border-radius: 4px;
-                object-fit: contain;
+                object-fit: cover;
             }
         /*Settings for the Selector panel*/
         .container {
@@ -332,14 +332,16 @@
             align-items: center;
             flex-shrink: 0;
         }
+
         .portrait-header {
             height: 60px;
         }
-            .portrait img {
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
+
+        .portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
 
         .box, .header {
             /*font-family:*/
@@ -359,11 +361,13 @@
             overflow-x: auto;
             max-width: 100vw;
         }
+
         .guess-row, .suggestion-row {
             display: grid;
             white-space: nowrap;
             min-width: max-content;
         }
+
         @media (max-width: 768px) {
             .box, .header, .portrait, .portrait-header {
                 width: 72px;
@@ -382,20 +386,26 @@
         }
 
         .portrait-img {
-            height: 64px; /* try 60–70px */
+            flex: 1 1 auto;
             width: 100%;
+            height: 70px; /* fixed height */
+            max-height: 70px; /* fixed height */
             object-fit: contain;
+            display: block;
         }
+
         .portrait-name {
+            flex: 0 0 auto;
+            max-height: 30px;
             font-size: 11px;
             text-align: center;
+            line-height: 1.2;
             margin-top: 4px;
             padding: 0 2px;
-            max-height: 32px;
-            /*overflow: hidden;*/
-            line-height: 1.2;
-            white-space: normal; /* 🔄 allow line wrapping */
+            text-overflow: ellipsis;
+            white-space: normal;
             word-break: break-word;
+            /*overflow: hidden;*/
         }
     </style>
 </head>
@@ -481,9 +491,9 @@
                 card.className = 'set-card';
                 card.dataset.set = key;
                 card.innerHTML = `
-                                <img src="${set.thumbnail}" alt="${set.label}" />
-                                <span>${set.label}</span>
-                            `;
+                                    <img src="${set.thumbnail}" alt="${set.label}" />
+                                    <span>${set.label}</span>
+                                `;
 
                 card.addEventListener('click', () => loadSet(key));
                 selector.appendChild(card);
