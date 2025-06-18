@@ -261,8 +261,8 @@
             text-align: center;
             transition: all 0.3s ease;
             
-            width: 120px;
-            height: 120px;
+            width: 75px;
+            height: 130px;
             background-size: cover;
             background-position: center;
             border: 2px solid transparent;
@@ -519,7 +519,7 @@
                 card.addEventListener('click', () => {
 
                     loadSet(key)
-                    renderSetSelector();
+                    renderSetSelector(data);
                 });
                 selector.appendChild(card);
             });
