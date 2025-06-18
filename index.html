@@ -503,25 +503,24 @@
             hintEl.textContent = `${randomHint}`;
         });
         //Detect set selection
-        function renderSetSelector() {
+        function renderSetSelector(data) {
             const selector = document.getElementById('setSelector');
             selector.innerHTML = '';
 
-            Object.entries(characterSets).forEach(([key, set]) => {
+            Object.entries(data).forEach(([key, set]) => {
                 const card = document.createElement('div');
                 card.className = 'set-card';
-                card.style.backgroundImage = `url(${set.thumbnail})`;
-
-                if (key === currentSetKey) {
-                    card.classList.add('selected');
-                }
+                card.dataset.set = key;
+                card.innerHTML = `
+                                    <img src="${set.thumbnail}" alt="${set.label}" />
+                                    <span>${set.label}</span>
+                                `;
 
                 card.addEventListener('click', () => {
-                    currentSetKey = key;
-                    loadSet(key);
+
+                    loadSet(key)
                     renderSetSelector();
                 });
-
                 selector.appendChild(card);
             });
         }
