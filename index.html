@@ -251,6 +251,7 @@
             min-width: 300px;
             padding: 20px;
             overflow-x: auto;
+            border-color: gold;
         }
 
         .set-card {
@@ -688,7 +689,9 @@
 
             const matches = characters.filter(c => {
                 const allNames = [c.name, ...(Array.isArray(c.aliases) ? c.aliases : [])];
-                return allNames.some(name => name.toLowerCase().includes(queryLower));
+                const matchesQuery = allNames.some(name => name.toLowerCase().includes(queryLower));
+                const isNotGuessed = !guessedCharacters.has(c.name);
+                return matchesQuery && isNotGuessed;
             });
 
             matches.sort(function (a, b) {
