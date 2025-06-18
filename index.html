@@ -470,7 +470,7 @@
         <footer class="set-selector" id="setSelector"></footer>
     </div>
     <script>
-        let currentSetKey = 'DM;
+        let currentSetKey = 'DM';
         let characterSets = {};
         let characters = [];
         let mysteryCharacter = null;
@@ -509,7 +509,7 @@
             const selector = document.getElementById('setSelector');
             selector.innerHTML = '';
 
-            Object.entries(data).forEach(([key, set]) => {
+            Object.entries(characterSets).forEach(([key, set]) => {
                 const card = document.createElement('div');
                 card.className = 'set-card';
                 /*card.dataset.set = key;*/
@@ -772,7 +772,6 @@
                 suggestionsBox.style.display = 'none';
             }
         });
-        /* Default to loading DM */
         window.addEventListener('DOMContentLoaded', () => {
             fetch('CharacterSet.json')
                 .then(res => {
@@ -781,8 +780,8 @@
                 })
                 .then(data => {
                     characterSets = data;
-                    renderSetSelector(data);
-                    loadSet('DM'); // or however you initialize
+                    loadSet(currentSetKey);
+                    renderSetSelector();
                 })
                 .catch(error => {
                     console.error('Failed to load character sets:', error);
