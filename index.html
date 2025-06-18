@@ -470,7 +470,7 @@
         <footer class="set-selector" id="setSelector"></footer>
     </div>
     <script>
-        let currentSetKey = null;
+        let currentSetKey = 'DM;
         let characterSets = {};
         let characters = [];
         let mysteryCharacter = null;
@@ -525,7 +525,7 @@
                 card.addEventListener('click', () => {
                     if (key !== currentSetKey) {
                         currentSetKey = key;
-                        loadSet(key)
+                        loadSet(key);
                         renderSetSelector();
                     }
                 });
