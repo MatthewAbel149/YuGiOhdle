@@ -226,21 +226,24 @@
         /*Settings for the Selector panel*/
         .container {
             display: flex;
-            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
             overflow: hidden;
         }
 
         .set-selector {
-            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
             background: #222;
             padding: 20px 10px;
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
-            gap: 15px;
             border-top: 2px solid #444;
             box-sizing: border-box;
-            margin-top: 40px;
         }
 
         .game-panel {
@@ -256,10 +259,18 @@
             border-radius: 8px;
             overflow: hidden;
             text-align: center;
-            transition: transform 0.2s;
+            transition: all 0.3s ease;
+            
+            width: 120px;
+            height: 120px;
+            background-size: cover;
+            background-position: center;
+            border: 2px solid transparent;
+            opacity: 0.6;
         }
 
             .set-card:hover {
+                opacity: 0.9;
                 transform: scale(1.05);
             }
 
@@ -268,6 +279,11 @@
                 height: 100px;
                 object-fit: cover;
                 display: block;
+            }
+            .set-card.selected
+            {
+                border-color: #fff;
+                opacity: 1;
             }
 
             .set-card span {
@@ -448,9 +464,9 @@
                 <p id="resultName"></p>
                 <button id="restartBtn">Play Again</button>
             </div>
+        </div>
             <h2 style="text-align:center; color:white;">Choose a Character Set</h2>
             <footer class="set-selector" id="setSelector"></footer>
-        </div>
     </div>
     <script>
         let characterSets = {};
@@ -487,20 +503,25 @@
             hintEl.textContent = `${randomHint}`;
         });
         //Detect set selection
-        function renderSetSelector(data) {
+        function renderSetSelector() {
             const selector = document.getElementById('setSelector');
             selector.innerHTML = '';
 
-            Object.entries(data).forEach(([key, set]) => {
+            Object.entries(characterSets).forEach(([key, set]) => {
                 const card = document.createElement('div');
                 card.className = 'set-card';
-                card.dataset.set = key;
-                card.innerHTML = `
-                                    <img src="${set.thumbnail}" alt="${set.label}" />
-                                    <span>${set.label}</span>
-                                `;
+                card.style.backgroundImage = `url(${set.thumbnail})`;
 
-                card.addEventListener('click', () => loadSet(key));
+                if (key === currentSetKey) {
+                    card.classList.add('selected');
+                }
+
+                card.addEventListener('click', () => {
+                    currentSetKey = key;
+                    loadSet(key);
+                    renderSetSelector();
+                });
+
                 selector.appendChild(card);
             });
         }
