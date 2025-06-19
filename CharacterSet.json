@@ -921,7 +921,7 @@
         "losses": "2",
         "duels": "4",
         "hair": "Black",
-        "affiliation": "Dark Signer",
+        "affiliation": "Dark Signers",
         "major Character": "Yes",
         "hints": [ "Fortune Fairy", "Fortune Lady", "Earthbound Immortal Aslla Piscu" ]
       },
@@ -1141,7 +1141,7 @@
         "aliases": [ "" ],
         "gender": "Male",
         "episode": "30",
-        "final Episode": "",
+        "final Episode": "154",
         "wins": "19",
         "losses": "4",
         "duels": "25",

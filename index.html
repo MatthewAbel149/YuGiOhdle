@@ -48,6 +48,8 @@
             background-image: linear-gradient(to bottom right, gold, brown);
             color: transparent;
             background-clip: text; /*Looks like error, but works*/
+            outline-color: white;
+
         }
 
         input {
@@ -320,7 +322,7 @@
 
         #restartBtn {
             padding: 10px 20px;
-            background: #4caf50;
+            background: transparent;
             border: none;
             color: white;
             font-size: 16px;
@@ -429,6 +431,39 @@
             word-break: break-word;
             /*overflow: hidden;*/
         }
+        /*Hint settings*/
+        .hint-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .hint-deco {
+            width: 24px;
+            height: 24px;
+            opacity: 0.6;
+        }
+
+        .hint-field {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid white;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            cursor: default;
+            transition: background-color 0.3s;
+            user-select: none;
+            min-width: 200px;
+        }
+
+            .hint-field.clickable {
+                cursor: pointer;
+                background-color: rgba(255, 255, 255, 0.2);
+            }
     </style>
 </head>
 <body>
@@ -440,7 +475,11 @@
 
                 <button id="hintBtn">Get Hint</button>
                 <p id="hintText" style="margin-top: 10px; font-size: 16px; color: white;"></p>
-
+                <div id="hintContainer" class="hint-container">
+                    <img src="images/assets/LevelStar.png" class="hint-deco" alt="">
+                    <div id="hintField" class="hint-field">Hint will unlock after 3 guesses</div>
+                    <img src="images/assets/LevelStar.png" class="hint-deco" alt="">
+                </div>
                 <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
                 <div class="scroll-wrapper">
                     <div id="suggestions" class="dropdown" style="display:none;">
@@ -550,6 +589,29 @@
             document.getElementById('resultScreen').style.display = 'none';
         });
 
+        function checkHintUnlock() {
+            const hintField = document.getElementById('hintField');
+            if (guessedCharacters.size >= 3 && !gameOver) { /* Change 3 to number of guesses required */
+                hintField.classList.add('clickable');
+                hintField.textContent = 'Click for a hint!';
+                hintField.onclick = revealHint;
+            }
+        }
+
+        function revealHint() {
+            const hintField = document.getElementById('hintField');
+            if (!mysteryCharacter || !Array.isArray(mysteryCharacter.hints)) {
+                hintEl.textContent = 'No hints available.';
+                return;
+            }
+            if (hintField.classList.contains('clickable')) {
+                const randomHint = mysteryCharacter.hints[Math.floor(Math.random() * mysteryCharacter.hints.length)];
+                const hint = mysteryCharacter.hints?.[hintIndex++] || "No more hints available.";
+                hintField.textContent = hint;
+                hintField.classList.remove('clickable');
+                hintField.onclick = null;
+            }
+        }
 
         function getAttributeFeedback(guessValue, answerValue) {
             // Numeric comparison
@@ -580,6 +642,7 @@
         function handleGuess(char) {
             if (gameOver) return;
             guessedCharacters.add(char.name);
+            checkHintUnlock();
 
             addGuessRow(char);
 
