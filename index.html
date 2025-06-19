@@ -11,6 +11,12 @@
             font-weight: normal;
             font-style: normal;
         }
+        @font-face {
+            font-family: 'ITC Stone Serif LT';
+            src: url('fonts/Yu-Gi-Oh! ITC Stone Serif LT Italic.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
 
         * {
             box-sizing: border-box;
@@ -443,15 +449,16 @@
         .hint-deco {
             width: 24px;
             height: 24px;
-            opacity: 0.6;
+            /*opacity: 0.6;*/
         }
 
         .hint-field {
+            font-family: "ITC Stone Serif LT";
             padding: 10px 20px;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border: 1px solid white;
-            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.0);
+            color: red;
+            /*border: 1px solid white;*/
+            /*border-radius: 8px;*/
             font-weight: bold;
             text-align: center;
             cursor: default;
@@ -473,8 +480,6 @@
 
                 <h1>Yu-Gi-Oh!dle</h1>
 
-                <button id="hintBtn">Get Hint</button>
-                <p id="hintText" style="margin-top: 10px; font-size: 16px; color: white;"></p>
                 <div id="hintContainer" class="hint-container">
                     <img src="images/assets/LevelStar.png" class="hint-deco" alt="">
                     <div id="hintField" class="hint-field">Hint will unlock after 3 guesses</div>
@@ -525,25 +530,6 @@
         const gridContainer = document.getElementById('grid');
 
 
-        document.getElementById('hintBtn').addEventListener('click', () => {
-            const hintEl = document.getElementById('hintText');
-
-            if (!mysteryCharacter || !Array.isArray(mysteryCharacter.hints)) {
-                hintEl.textContent = 'No hints available.';
-                return;
-            }
-
-            const hints = mysteryCharacter.hints;
-
-            if (hints.length === 0) {
-                hintEl.textContent = 'No hints available.';
-                return;
-            }
-
-            // Select a single random hint
-            const randomHint = hints[Math.floor(Math.random() * hints.length)];
-            hintEl.textContent = `${randomHint}`;
-        });
         //Detect set selection
         function renderSetSelector(data) {
             const selector = document.getElementById('setSelector');
