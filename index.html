@@ -29,10 +29,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f5f5f5;
             background-attachment: fixed;
             background-image: url('images/assets/CardBG.jpg'); /*Background for site*/
-            background-color: rgba(0,0,0,0.4);
+            background-color: gray;
             background-blend-mode: darken;
             background-position: center;
         }
@@ -272,7 +271,7 @@
             
         }
         .game-panel::-webkit-scrollbar,
-        .::-webkit-scrollbar{
+        #suggestions.dropdown::-webkit-scrollbar{
             display: none;
         }
         .set-card {
@@ -344,7 +343,7 @@
         .result-screen img {
             width: 100%;
             max-height: 400px;
-            object-fit: cover;
+            object-fit: contain;
             border-radius: 8px;
             margin-bottom: 10px;
         }
