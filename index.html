@@ -248,19 +248,24 @@
             height: 100%;
             overflow: hidden;
         }
-
+        .selectorPanel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin: 40px auto 40px;
+            background: rgba(0,0,0,0.7);
+            padding: 10px;
+            max-width: 800px;
+        }
         .set-selector {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 20px;
-            background: #222;
-            padding: 20px 10px;
-            display: flex;
-            flex-wrap: wrap;
-            border-top: 2px solid #444;
-            box-sizing: border-box;
+            margin: 40px auto 40px;
+            padding: 10px;
+            max-width: 800px;
         }
 
         .game-panel {
@@ -541,8 +546,11 @@
                 </div>
             </div>
         </div>
-        <h2 style="text-align:center; color:white;">Choose a Character Set</h2>
-        <footer class="set-selector" id="setSelector"></footer>
+        <div id="selectorPanel" class="selectorPanel">
+        <h2 style="text-align:center; color:red; width: 100%; height: 20px;">Choose a Character Set</h2>
+        <div id="setSelector" class="set-selector"></div>
+        </div>
+
     </div>
     <script>
         let currentSetKey = 'DM';
