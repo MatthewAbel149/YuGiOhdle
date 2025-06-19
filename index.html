@@ -32,7 +32,7 @@
             background: #f5f5f5;
             background-attachment: fixed;
             background-image: url('images/assets/CardBG.jpg'); /*Background for site*/
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.4);
             background-blend-mode: darken;
             background-position: center;
         }
@@ -194,6 +194,7 @@
             overflow-x: auto;
             display: block;
             white-space: nowrap;
+            outline-color: transparent;
         }
 
             #suggestions .guess-row {
@@ -235,6 +236,11 @@
                 border-radius: 4px;
                 object-fit: cover;
             }
+        .hide-scrollbar {
+            overflow-x: auto;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE/Edge */
+        }
         /*Settings for the Selector panel*/
         .container {
             display: flex;
@@ -266,7 +272,7 @@
             
         }
         .game-panel::-webkit-scrollbar,
-        .scroll-wrapper::-webkit-scrollbar{
+        .::-webkit-scrollbar{
             display: none;
         }
         .set-card {
@@ -511,7 +517,7 @@
                 </div>
                 <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
                 <div class="scroll-wrapper">
-                    <div id="suggestions" class="dropdown" style="display:none;">
+                    <div id="suggestions" class="dropdown hide-scrollbar" style="display:none;">
                         <div class="guess-row preview-entry">
                             <div class="portrait"></div>
                             <div class="box"></div>
