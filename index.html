@@ -305,10 +305,10 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             background: rgba(0, 0, 0, 0.75);
-            color: white;
+            color: red;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -611,6 +611,14 @@
                 hintField.onclick = null;
             }
         }
+        function resetHints() {
+            hintIndex = 0;
+
+            const hintField = document.getElementById('hintField');
+            hintField.textContent = `Hint unlocks in ${HINT_UNLOCK_THRESHOLD} guesses`;
+            hintField.classList.remove('clickable');
+            hintField.onclick = null;
+        }
 
         function getAttributeFeedback(guessValue, answerValue) {
             // Numeric comparison
@@ -819,7 +827,7 @@
             mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
             guessedCharacters.clear();
             gameOver = false;
-            hintIndex = 0;
+            resetHints();
 
             searchInput.value = '';
             searchInput.disabled = false;
