@@ -303,35 +303,54 @@
         /*Settings for the results screen*/
         .result-screen {
             display: flex;
-            position: fixed;
-            width: 250px;
-            height: 450px;
+            justify-content: center; 
+            align-items: center;
+            margin-top: 20px;
+            width: 100%;
+
+            top: 0;
+            left: 0;
+            height: 100%;
             background: rgba(0, 0, 0, 0.75);
             color: red;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             z-index: 2000;
             text-align: center;
+            position: fixed;
         }
-
-            .result-screen img {
-                width: 200px;
-                height: auto;
-                margin: 20px 0;
-                border-radius: 8px;
-                object-fit: cover;
-                box-shadow: 0 0 12px #000;
-            }
-
-        #restartBtn {
-            padding: 10px 20px;
-            background: transparent;
-            border: none;
+        .result-panel {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            max-width: 300px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        .result-screen img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .result-panel h2 {
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+        .result-panel button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
-            font-size: 16px;
-            cursor: pointer;
+            border: 1px solid white;
             border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .result-panel button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
         }
         /*Refactored row style settings*/
         .guess-row,
@@ -480,7 +499,7 @@
 
                 <div id="hintContainer" class="hint-container">
                     <img src="images/assets/LevelStar.png" class="hint-deco" alt="">
-                    <div id="hintField" class="hint-field">Hint will unlock after X guesses</div>
+                    <div id="hintField" class="hint-field">Hint will unlock after 3 guesses</div>
                     <img src="images/assets/LevelStar.png" class="hint-deco" alt="">
                 </div>
                 <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
@@ -502,10 +521,12 @@
                 </div>
             </div>
             <div id="resultScreen" class="result-screen" style="display: none;">
+                <div class="result-panel">
                 <h2>You guessed correctly!</h2>
                 <img id="resultImage" src="" alt="Character" />
-                <p id="resultName"></p>
-                <button id="restartBtn">Play Again</button>
+                <h2 id="resultName"></h2>
+                <button onclick="loadSet(currentSetKey)">Play Again?</button>
+                </div>
             </div>
         </div>
         <h2 style="text-align:center; color:white;">Choose a Character Set</h2>
@@ -520,7 +541,7 @@
         let defaultValues = [];
         const guessedCharacters = new Set();
         let gameOver = false;
-        let hintIndex = 0; /*Depracated*/
+        let hintIndex = 0; /*Depracated+*/
         const HINT_UNLOCK_THRESHOLD = 3;
 
         const searchInput = document.getElementById('searchInput');
@@ -556,22 +577,6 @@
                 selector.appendChild(card);
             });
         }
-        /*Detect restart*/
-        document.getElementById('restartBtn').addEventListener('click', () => {
-            // Pick a new character from the current set
-            mysteryCharacter = characters[Math.floor(Math.random() * characters.length)];
-
-            // Reset game state
-            guessedCharacters.clear();
-            gameOver = false;
-            searchInput.value = '';
-            searchInput.disabled = false;
-            suggestionsBox.innerHTML = '';
-            gridContainer.innerHTML = '';
-
-            renderHeaderRow();
-            document.getElementById('resultScreen').style.display = 'none';
-        });
 
         function checkHintUnlock() {
             const hintField = document.getElementById('hintField');
