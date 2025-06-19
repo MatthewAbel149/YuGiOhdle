@@ -302,14 +302,12 @@
 
         /*Settings for the results screen*/
         .result-screen {
+            display: flex;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            width: 250px;
+            height: 450px;
             background: rgba(0, 0, 0, 0.75);
             color: red;
-            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
@@ -482,7 +480,7 @@
 
                 <div id="hintContainer" class="hint-container">
                     <img src="images/assets/LevelStar.png" class="hint-deco" alt="">
-                    <div id="hintField" class="hint-field">Hint will unlock after 3 guesses</div>
+                    <div id="hintField" class="hint-field">Hint will unlock after X guesses</div>
                     <img src="images/assets/LevelStar.png" class="hint-deco" alt="">
                 </div>
                 <input type="text" id="searchInput" placeholder="Type a character name..." autocomplete="off" />
@@ -522,7 +520,7 @@
         let defaultValues = [];
         const guessedCharacters = new Set();
         let gameOver = false;
-        let hintIndex = 0; /*Depracated+*/
+        let hintIndex = 0; /*Depracated*/
         const HINT_UNLOCK_THRESHOLD = 3;
 
         const searchInput = document.getElementById('searchInput');
