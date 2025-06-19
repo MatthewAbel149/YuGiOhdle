@@ -517,7 +517,8 @@
         let defaultValues = [];
         const guessedCharacters = new Set();
         let gameOver = false;
-        let hintIndex = 0;
+        let hintIndex = 0; /*Depracated+*/
+        const HINT_UNLOCK_THRESHOLD = 3;
 
         const searchInput = document.getElementById('searchInput');
         const suggestionsBox = document.getElementById('suggestions');
@@ -591,10 +592,23 @@
 
         function checkHintUnlock() {
             const hintField = document.getElementById('hintField');
-            if (guessedCharacters.size >= 3 && !gameOver) { /* Change 3 to number of guesses required */
-                hintField.classList.add('clickable');
+            const guessesLeft = HINT_UNLOCK_THRESHOLD - guessedCharacters.size;
+
+            if (gameOver) {
+                hintField.textContent = '';
+                hintField.classList.remove('clickable');
+                hintField.onclick = null;
+                return;
+            }
+
+            if (guessesLeft <= 0) {
                 hintField.textContent = 'Click for a hint!';
+                hintField.classList.add('clickable');
                 hintField.onclick = revealHint;
+            } else {
+                hintField.textContent = `Hint unlocks in ${guessesLeft} guess${guessesLeft !== 1 ? 'es' : ''}`;
+                hintField.classList.remove('clickable');
+                hintField.onclick = null;
             }
         }
 
@@ -607,7 +621,7 @@
             if (hintField.classList.contains('clickable')) {
                 const randomHint = mysteryCharacter.hints[Math.floor(Math.random() * mysteryCharacter.hints.length)];
                 const hint = mysteryCharacter.hints?.[hintIndex++] || "No more hints available.";
-                hintField.textContent = hint;
+                hintField.textContent = randomHint;
                 hintField.classList.remove('clickable');
                 hintField.onclick = null;
             }
