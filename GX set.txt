@@ -1,0 +1,50 @@
+/*"GX": {
+  "label": "GX",
+  "thumbnail": "images/assets/GXSplash.jpg",
+  "arcMap": [
+    {
+      "arc": "Seven Stars",
+      "start": 1,
+      "end": 52
+    },
+    {
+      "arc": "Society of Light",
+      "start": 53,
+      "end": 104
+    },
+    {
+      "arc": "Dimension World",
+      "start": 105,
+      "end": 156
+    },
+    {
+      "arc": "Darkness",
+      "start": 157,
+      "end": 180
+    }
+  ],
+  "defaults": {
+    "image": "images/assets/TheVagabond.png",
+    "name": "Unknown",
+    "gender": "Unknown",
+    "hair": "Unknown",
+    "episode": "0",
+    "arc": "None",
+    "alignment": "Unknown",
+    "affiliation": "Unknown",
+    "species":  "Human"
+  },
+  "attributes": [ "image", "gender", "arc", "episode", "hair", "alignment", "affiliation", "species" ],
+  "characters": [
+    {
+      "image": "images/GX/Jaden.png",
+      "name": "Jaden Yuki",
+      "gender": "Male",
+      "episode": "1",
+      "height": "165.7",
+      "alignment":  "Good",
+      "affiliation": "Student",
+      "species": ""
+    }
+  ]
+},*/
