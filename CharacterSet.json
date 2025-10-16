@@ -687,7 +687,7 @@
       }
     ]
   },
-  "GX": {
+  /*"GX": {
     "label": "GX",
     "thumbnail": "images/assets/GXSplash.jpg",
     "arcMap": [
@@ -736,7 +736,7 @@
         "species": ""
       }
     ]
-  },
+  },*/
   "5Ds": {
     "label": "5Ds",
     "thumbnail": "images/assets/5DSSplash.jpg",
